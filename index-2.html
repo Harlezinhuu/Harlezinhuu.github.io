@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harle — Portfólio</title>
+<meta name="description" content="Projetos do Harle: otimizador de FPS, player de música e assistente pessoal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23eef1f5'/%3E%3Cstop offset='.55' stop-color='%238a919c'/%3E%3Cstop offset='1' stop-color='%23d3d8df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 3 57 17.5v29L32 61 7 46.5v-29z' fill='%2316181d' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M23 19v26M41 19v26M23 32h18' stroke='%234c8dff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#16181d;          /* grafite */
+  --bg-raised:#1d2027;
+  --line:#2c3039;
+  --text:#e6e8ec;
+  --muted:#9aa1ad;
+  --silver-1:#f1f3f6;
+  --silver-2:#a9b0ba;
+  --silver-3:#6f7682;
+  --blue:#4c8dff;        /* confiança, cor principal */
+  --cyan:#2fd4e6;        /* Harle */
+  --magenta:#e0479e;     /* Harle Player */
+  --amber:#f2a93b;       /* Jarvis */
+  --silver:linear-gradient(105deg,var(--silver-2) 0%,var(--silver-1) 28%,var(--silver-3) 52%,var(--silver-1) 74%,var(--silver-2) 100%);
+  --radius-sm:6px;
+  --radius-lg:14px;
+  --display:"Chakra Petch",system-ui,sans-serif;
+  --body:"Manrope",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  background-image:
+    radial-gradient(1200px 520px at 85% -10%,rgba(76,141,255,.13),transparent 60%),
+    radial-gradient(700px 400px at -10% 40%,rgba(169,176,186,.06),transparent 70%);
+  color:var(--text);font:400 1rem/1.65 var(--body);
+  min-height:100vh;overflow-x:hidden;
+}
+html[data-lang="pt"] .en, html[data-lang="en"] .pt{display:none}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1080px,100% - 32px);margin-inline:auto}
+
+/* ---------- topo ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 1.05rem var(--display);letter-spacing:.02em}
+.brand svg{width:30px;height:30px}
+.top nav{display:flex;align-items:center;gap:22px;font-size:.92rem;color:var(--muted)}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--text)}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--bg-raised)}
+.lang button{all:unset;cursor:pointer;font:600 .78rem var(--display);padding:4px 10px;border-radius:999px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--silver);color:#1a1c21}
+.lang button:focus-visible{outline:2px solid var(--blue)}
+@media (max-width:640px){.top nav .navlink{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(48px,11vw,120px) 0 clamp(56px,9vw,96px)}
+.wordmark{
+  font:700 clamp(5rem,22vw,13.5rem)/.85 var(--display);letter-spacing:-.035em;
+  background:var(--silver);background-size:220% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 18px 40px rgba(76,141,255,.18));
+  animation:sheen 2.2s cubic-bezier(.3,.6,.2,1) .25s both;
+}
+@keyframes sheen{from{background-position:0 0}to{background-position:100% 0}}
+.hero .rule{height:2px;width:min(420px,70%);margin:26px 0 24px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan) 35%,var(--magenta) 70%,var(--amber));border-radius:2px}
+.hero p{font-size:clamp(1.1rem,2.6vw,1.4rem);max-width:34ch;color:var(--text)}
+.hero .sub{color:var(--muted);font-size:1rem;margin-top:10px;max-width:46ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 .95rem var(--display);
+  padding:12px 20px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--bg-raised);transition:border-color .2s,transform .2s}
+.btn svg{width:18px;height:18px}
+.btn:hover{border-color:var(--silver-3)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover{background:#3d7ef0}
+
+/* ---------- seções ---------- */
+section{padding:clamp(48px,8vw,88px) 0}
+h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
+.lead{color:var(--muted);max-width:52ch;margin-bottom:40px}
+
+/* projetos: cada um com sua cor de impacto */
+.project{
+  --accent:var(--blue);
+  display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center;
+  padding:clamp(22px,4vw,40px);margin-bottom:22px;
+  background:linear-gradient(180deg,var(--bg-raised),rgba(29,32,39,.55));
+  border:1px solid var(--line);border-radius:var(--radius-lg);position:relative;overflow:hidden;
+}
+.project::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+.project:nth-of-type(even) .art{order:-1}
+.project.harle{--accent:var(--cyan)}
+.project.player{--accent:var(--magenta)}
+.project.jarvis{--accent:var(--amber)}
+.kind{font:500 .85rem var(--display);color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.project h3{font:700 clamp(1.6rem,3.6vw,2.2rem)/1.1 var(--display);margin-bottom:12px}
+.project p{color:var(--muted);max-width:46ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px;padding:0;list-style:none}
+.tags li{font-size:.8rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--text)}
+.links{display:flex;flex-wrap:wrap;gap:16px}
+.links a{font:600 .92rem var(--display);text-decoration:none;color:var(--text);border-bottom:2px solid var(--accent);padding-bottom:2px}
+.links a:hover{color:var(--accent)}
+.art{border-radius:10px;background:#121418;border:1px solid var(--line);aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
+.art svg{width:100%;height:100%}
+/* print real do projeto por cima; se não carregar, a ilustração aparece */
+.art.shot{position:relative}
+.art.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+@media (max-width:760px){
+  .project{grid-template-columns:1fr}
+  .project:nth-of-type(even) .art{order:0}
+}
+
+/* em breve */
+.next{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.next div{padding:26px 22px 8px 0}
+.next div + div{padding-left:22px;border-left:1px solid var(--line)}
+.next h3{font:600 1.2rem var(--display);margin-bottom:6px}
+.next p{color:var(--muted);font-size:.95rem}
+.soon{display:inline-block;font:600 .74rem var(--display);color:var(--blue);border:1px solid rgba(76,141,255,.45);border-radius:999px;padding:2px 9px;margin-bottom:12px}
+@media (max-width:760px){
+  .next{grid-template-columns:1fr}
+  .next div,.next div + div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+
+/* sobre / contato */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:start}
+.about p{color:var(--muted);max-width:48ch}
+.about p + p{margin-top:12px}
+.contact a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;padding:16px 0;border-bottom:1px solid var(--line);font:600 1.05rem var(--display)}
+.contact a:first-child{border-top:1px solid var(--line)}
+.contact a span:last-child{color:var(--muted);font:500 .9rem var(--body)}
+.contact a:hover span:first-child{color:var(--blue)}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+
+footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .wordmark{background-position:50% 0}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <defs><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef1f5"/><stop offset=".55" stop-color="#8a919c"/><stop offset="1" stop-color="#d3d8df"/></linearGradient></defs>
+      <path d="M32 3 57 17.5v29L32 61 7 46.5v-29z" fill="#16181d" stroke="url(#sv)" stroke-width="4"/>
+      <path d="M23 19v26M41 19v26M23 32h18" stroke="#4c8dff" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    Harle
+  </a>
+  <nav>
+    <a class="navlink" href="#projetos"><span class="pt">Projetos</span><span class="en">Projects</span></a>
+    <a class="navlink" href="#sobre"><span class="pt">Sobre</span><span class="en">About</span></a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set="pt" aria-pressed="true">PT</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero" aria-labelledby="t">
+    <h1 id="t" class="wordmark">Harle</h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p>
+      <span class="pt">Faço apps para quem joga, ouve música e gosta de deixar o PC do seu jeito.</span>
+      <span class="en">I build apps for people who game, listen to music, and like their PC set up their way.</span>
+    </p>
+    <p class="sub">
+      <span class="pt">Otimizador de FPS, player de música e um assistente pessoal. Tudo feito por mim, com o código no GitHub.</span>
+      <span class="en">An FPS optimizer, a music player and a personal assistant. All built by me, with the code on GitHub.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#projetos"><span class="pt">Ver projetos</span><span class="en">See projects</span></a>
+      <a class="btn" href="https://github.com/Harlezinhuu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a class="btn" href="https://discord.gg/rDb9raznQ7" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18.2 18.2 0 0 0-5.6 0L8.6 3a19.5 19.5 0 0 0-4.9 1.5C.6 9.1-.3 13.6.2 18a19.8 19.8 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14 14 0 0 0 12 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 0 0 6-3c.5-5.1-.9-9.6-3.5-13.6ZM8.1 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg>
+        <span class="pt">Comunidade</span><span class="en">Community</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="projetos" class="wrap" aria-labelledby="p">
+    <h2 id="p"><span class="pt">Projetos</span><span class="en">Projects</span></h2>
+    <p class="lead">
+      <span class="pt">Cada projeto tem sua própria cor. Todos são feitos para uso de verdade, no meu PC e no dos meus amigos.</span>
+      <span class="en">Each project has its own color. All of them are made for real use, on my PC and my friends'.</span>
+    </p>
+
+    <!-- HARLE -->
+    <article class="project harle">
+      <div>
+        <div class="kind"><span class="pt">Otimizador para Windows</span><span class="en">Windows optimizer</span></div>
+        <h3>Harle</h3>
+        <p>
+          <span class="pt">Ganha FPS ajustando o Windows e a placa de vídeo. Cada ajuste é opcional, explica o que faz e avisa antes de aplicar. Ideal para usar logo depois de formatar o PC.</span>
+          <span class="en">Gets you more FPS by tuning Windows and your graphics card. Every tweak is optional, explains what it does and warns you before applying. Made for right after a fresh Windows install.</span>
+        </p>
+        <ul class="tags">
+          <li>Windows 10 / 11</li>
+          <li>NVIDIA &amp; AMD</li>
+          <li><span class="pt">Debloat opcional</span><span class="en">Optional debloat</span></li>
+          <li><span class="pt">Medição antes/depois</span><span class="en">Before/after benchmark</span></li>
+        </ul>
+        <div class="links">
+          <a href="https://github.com/Harlezinhuu/HarleOptimizer/releases" target="_blank" rel="noopener"><span class="pt">Baixar</span><span class="en">Download</span></a>
+          <a href="https://github.com/Harlezinhuu/HarleOptimizer" target="_blank" rel="noopener"><span class="pt">Ver código</span><span class="en">View code</span></a>
+        </div>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 320 200">
+          <g stroke="#2c3039" stroke-width="1"><path d="M20 40h280M20 80h280M20 120h280M20 160h280"/></g>
+          <path d="M20 150 C60 148 80 140 110 138 S150 132 160 120" fill="none" stroke="#6f7682" stroke-width="2.5" stroke-dasharray="5 5"/>
+          <path d="M160 120 C180 90 200 70 230 62 S280 52 300 48" fill="none" stroke="#2fd4e6" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M160 120 C180 90 200 70 230 62 S280 52 300 48 V180 H160Z" fill="#2fd4e6" opacity=".08"/>
+          <line x1="160" y1="28" x2="160" y2="180" stroke="#a9b0ba" stroke-width="1" opacity=".5"/>
+          <text class="pt" x="80" y="176" fill="#6f7682" font-family="Chakra Petch" font-size="12" text-anchor="middle">antes</text>
+          <text class="en" x="80" y="176" fill="#6f7682" font-family="Chakra Petch" font-size="12" text-anchor="middle">before</text>
+          <text class="pt" x="230" y="176" fill="#2fd4e6" font-family="Chakra Petch" font-size="12" text-anchor="middle">depois</text>
+          <text class="en" x="230" y="176" fill="#2fd4e6" font-family="Chakra Petch" font-size="12" text-anchor="middle">after</text>
+          <text x="24" y="30" fill="#9aa1ad" font-family="Chakra Petch" font-size="12">FPS</text>
+        </svg>
+      </div>
+    </article>
+
+    <!-- HARLE PLAYER -->
+    <article class="project player">
+      <div>
+        <div class="kind"><span class="pt">Player de música para desktop</span><span class="en">Desktop music player</span></div>
+        <h3>Harle Player</h3>
+        <p>
+          <span class="pt">Toca SoundCloud e YouTube Music dentro do próprio app, com wallpapers animados e o que você está ouvindo aparecendo no seu perfil do Discord.</span>
+          <span class="en">Plays SoundCloud and YouTube Music inside the app itself, with animated wallpapers and what you're listening to showing up on your Discord profile.</span>
+        </p>
+        <ul class="tags">
+          <li>SoundCloud</li>
+          <li>YouTube Music</li>
+          <li>Discord Rich Presence</li>
+          <li><span class="pt">Wallpapers animados</span><span class="en">Animated wallpapers</span></li>
+        </ul>
+        <div class="links">
+          <a href="https://github.com/Harlezinhuu/HarlePlayer" target="_blank" rel="noopener"><span class="pt">Ver no GitHub</span><span class="en">View on GitHub</span></a>
+        </div>
+      </div>
+      <div class="art shot">
+        <img src="https://github.com/Harlezinhuu/HarlePlayer/raw/main/docs/screenshot.jpg" alt="Tela do Harle Player" loading="lazy"
+             onerror="this.remove()">
+        <svg viewBox="0 0 320 200" aria-hidden="true">
+          <rect x="34" y="40" width="88" height="88" rx="10" fill="#1d2027" stroke="#2c3039"/>
+          <circle cx="78" cy="84" r="26" fill="none" stroke="#e0479e" stroke-width="3"/>
+          <circle cx="78" cy="84" r="5" fill="#e0479e"/>
+          <rect x="140" y="52" width="130" height="10" rx="5" fill="#a9b0ba" opacity=".85"/>
+          <rect x="140" y="72" width="84" height="8" rx="4" fill="#6f7682"/>
+          <g fill="#e0479e">
+            <rect x="140" y="100" width="8" height="28" rx="2" opacity=".5"/><rect x="153" y="88" width="8" height="40" rx="2"/>
+            <rect x="166" y="106" width="8" height="22" rx="2" opacity=".6"/><rect x="179" y="94" width="8" height="34" rx="2" opacity=".85"/>
+            <rect x="192" y="112" width="8" height="16" rx="2" opacity=".5"/><rect x="205" y="98" width="8" height="30" rx="2" opacity=".8"/>
+            <rect x="218" y="108" width="8" height="20" rx="2" opacity=".55"/>
+          </g>
+          <rect x="34" y="152" width="252" height="4" rx="2" fill="#2c3039"/>
+          <rect x="34" y="152" width="150" height="4" rx="2" fill="#e0479e"/>
+          <circle cx="184" cy="154" r="7" fill="#f1f3f6"/>
+        </svg>
+      </div>
+    </article>
+
+    <!-- JARVIS -->
+    <article class="project jarvis">
+      <div>
+        <div class="kind"><span class="pt">Assistente pessoal por voz</span><span class="en">Personal voice assistant</span></div>
+        <h3>Jarvis</h3>
+        <p>
+          <span class="pt">Uma base aberta e gratuita para você montar o seu próprio assistente. Conversa por voz, lembra do que você gosta e abre programas no PC. Vem com um guia de ajuda para quem está começando.</span>
+          <span class="en">A free, open starting point for building your own assistant. It talks by voice, remembers what you like and opens programs on your PC. Comes with a help guide for beginners.</span>
+        </p>
+        <ul class="tags">
+          <li><span class="pt">Conversa por voz</span><span class="en">Voice chat</span></li>
+          <li><span class="pt">Controla o PC</span><span class="en">Controls your PC</span></li>
+          <li><span class="pt">IAs gratuitas</span><span class="en">Free AI providers</span></li>
+          <li>Windows &amp; Linux</li>
+        </ul>
+        <div class="links">
+          <a href="https://github.com/Harlezinhuu/Jarvis-base" target="_blank" rel="noopener"><span class="pt">Ver no GitHub</span><span class="en">View on GitHub</span></a>
+          <a href="https://github.com/Harlezinhuu/Jarvis-base/blob/main/COMECE-AQUI.md" target="_blank" rel="noopener"><span class="pt">Comece aqui</span><span class="en">Get started</span></a>
+        </div>
+      </div>
+      <div class="art shot">
+        <img src="https://github.com/Harlezinhuu/Jarvis-base/raw/main/docs/img/hud-anel-ativo.jpg" alt="HUD do Jarvis" loading="lazy" onerror="this.remove()">
+        <svg viewBox="0 0 320 200" aria-hidden="true">
+          <circle cx="160" cy="100" r="70" fill="none" stroke="#2c3039" stroke-width="1"/>
+          <circle cx="160" cy="100" r="58" fill="none" stroke="#f2a93b" stroke-width="2" stroke-dasharray="120 26 40 26" opacity=".9"/>
+          <circle cx="160" cy="100" r="44" fill="none" stroke="#a9b0ba" stroke-width="1.5" stroke-dasharray="4 6" opacity=".7"/>
+          <circle cx="160" cy="100" r="28" fill="#f2a93b" opacity=".12"/>
+          <circle cx="160" cy="100" r="16" fill="none" stroke="#f2a93b" stroke-width="3"/>
+          <path d="M60 100h30M230 100h30" stroke="#6f7682" stroke-width="1.5"/>
+          <circle cx="60" cy="100" r="3" fill="#f2a93b"/><circle cx="260" cy="100" r="3" fill="#f2a93b"/>
+        </svg>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap" aria-labelledby="n">
+    <h2 id="n"><span class="pt">Próximos projetos</span><span class="en">Coming next</span></h2>
+    <p class="lead">
+      <span class="pt">O que estou construindo agora.</span>
+      <span class="en">What I'm building right now.</span>
+    </p>
+    <div class="next">
+      <div>
+        <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
+        <h3><span class="pt">Bot de Discord</span><span class="en">Discord bot</span></h3>
+        <p><span class="pt">Música, ranking e mini-games para servidores.</span><span class="en">Music, leaderboards and mini-games for servers.</span></p>
+      </div>
+      <div>
+        <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
+        <h3><span class="pt">Jogo de navegador</span><span class="en">Browser game</span></h3>
+        <p><span class="pt">Jogável direto aqui no site, sem instalar nada.</span><span class="en">Playable right here on the site, nothing to install.</span></p>
+      </div>
+      <div>
+        <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
+        <h3><span class="pt">Ferramenta de terminal</span><span class="en">Command-line tool</span></h3>
+        <p><span class="pt">Um utilitário rápido para organizar e limpar o PC.</span><span class="en">A quick utility to organize and clean up your PC.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" class="wrap about" aria-labelledby="s">
+    <div>
+      <h2 id="s"><span class="pt">Sobre</span><span class="en">About</span></h2>
+      <p>
+        <span class="pt">Me chamo Ahmad, tenho 21 anos e, na comunidade, todo mundo me conhece como Harle. Programar é uma paixão que eu carrego desde criança, e até hoje é o que eu mais gosto de fazer no meu tempo livre.</span>
+        <span class="en">My name is Ahmad, I'm 21, and in the community everyone knows me as Harle. Programming has been a passion of mine since I was a kid, and it's still my favorite thing to do in my free time.</span>
+      </p>
+      <p>
+        <span class="pt">Programo por hobby, não por obrigação. Quase tudo que eu crio começa resolvendo um problema meu, no meu próprio PC, e quando eu vejo, meus amigos e a comunidade já estão usando também.</span>
+        <span class="en">I code as a hobby, not because I have to. Almost everything I make starts as a fix for a problem of my own, on my own PC, and before I know it my friends and the community are using it too.</span>
+      </p>
+      <p>
+        <span class="pt">Gosto de ajudar quem está começando, porque sei como é estar desse lado. Por isso todo projeto público meu vem com explicação.</span>
+        <span class="en">I like helping people who are just starting out, because I know what it's like to be there. That's why every public project of mine comes with explanations.</span>
+      </p>
+    </div>
+    <div class="contact">
+      <a href="https://github.com/Harlezinhuu" target="_blank" rel="noopener"><span>GitHub</span><span>@Harlezinhuu</span></a>
+      <a href="https://discord.gg/rDb9raznQ7" target="_blank" rel="noopener"><span>Discord</span><span><span class="pt">Comunidade</span><span class="en">Community</span></span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span class="pt">Feito por Harle.</span><span class="en">Made by Harle.</span>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang button');
+  function set(l){
+    root.setAttribute('data-lang',l);
+    root.lang = l==='pt' ? 'pt-BR' : 'en';
+    btns.forEach(function(b){b.setAttribute('aria-pressed', String(b.dataset.set===l))});
+    try{localStorage.setItem('harle-lang',l)}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('harle-lang')}catch(e){}
+  set(saved || ((navigator.language||'pt').toLowerCase().indexOf('pt')===0 ? 'pt' : 'en'));
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+})();
+</script>
+</body>
+</html>
