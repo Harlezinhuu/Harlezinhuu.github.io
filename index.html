@@ -23,6 +23,7 @@
   --cyan:#2fd4e6;        /* Harle */
   --magenta:#e0479e;     /* Harle Player */
   --amber:#f2a93b;       /* Jarvis */
+  --violet:#8b7bff;      /* Harle Bot */
   --silver:linear-gradient(105deg,var(--silver-2) 0%,var(--silver-1) 28%,var(--silver-3) 52%,var(--silver-1) 74%,var(--silver-2) 100%);
   --radius-sm:6px;
   --radius-lg:14px;
@@ -97,6 +98,10 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 .project.harle{--accent:var(--cyan)}
 .project.player{--accent:var(--magenta)}
 .project.jarvis{--accent:var(--amber)}
+.project.bot{--accent:var(--violet)}
+.project.bot .art{aspect-ratio:1000/460}
+.project.bot .art.shot img{object-fit:contain}
+.links a[hidden]{display:none}
 .kind{font:500 .85rem var(--display);color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
 .project h3{font:700 clamp(1.6rem,3.6vw,2.2rem)/1.1 var(--display);margin-bottom:12px}
 .project p{color:var(--muted);max-width:46ch}
@@ -116,7 +121,7 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 }
 
 /* em breve */
-.next{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.next{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
 .next div{padding:26px 22px 8px 0}
 .next div + div{padding-left:22px;border-left:1px solid var(--line)}
 .next h3{font:600 1.2rem var(--display);margin-bottom:6px}
@@ -176,8 +181,8 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
       <span class="en">I build apps for people who game, listen to music, and like their PC set up their way.</span>
     </p>
     <p class="sub">
-      <span class="pt">Otimizador de FPS, player de música e um assistente pessoal. Tudo feito por mim, com o código no GitHub.</span>
-      <span class="en">An FPS optimizer, a music player and a personal assistant. All built by me, with the code on GitHub.</span>
+      <span class="pt">Otimizador de FPS, player de música, assistente pessoal e um bot de Discord completo. Tudo feito por mim, com o código no GitHub.</span>
+      <span class="en">An FPS optimizer, a music player, a personal assistant and a full Discord bot. All built by me, with the code on GitHub.</span>
     </p>
     <div class="actions">
       <a class="btn primary" href="#projetos"><span class="pt">Ver projetos</span><span class="en">See projects</span></a>
@@ -309,6 +314,32 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
         </svg>
       </div>
     </article>
+    <!-- HARLE BOT -->
+    <article class="project bot">
+      <div>
+        <div class="kind"><span class="pt">Bot de Discord</span><span class="en">Discord bot</span></div>
+        <h3>Harle Bot</h3>
+        <p>
+          <span class="pt">Um bot completo em português: moderação com automod e anti-raid, economia com loja e perfil em imagem, conquistas, sorteios, tickets e jogos como truco paulista, xadrez, blackjack e campo minado.</span>
+          <span class="en">A full-featured Discord bot in Portuguese: moderation with automod and anti-raid, an economy with a shop and image profile cards, achievements, giveaways, tickets, and games like Brazilian truco, chess, blackjack and minesweeper.</span>
+        </p>
+        <ul class="tags">
+          <li>Python</li>
+          <li>discord.py</li>
+          <li><span class="pt">+50 comandos</span><span class="en">50+ commands</span></li>
+          <li><span class="pt">Truco e xadrez</span><span class="en">Truco &amp; chess</span></li>
+          <li><span class="pt">Testes automáticos</span><span class="en">Automated tests</span></li>
+        </ul>
+        <div class="links">
+          <!-- O link de convite é montado a partir do Application ID (data-client-id). -->
+          <a id="convite-bot" data-client-id="" data-permissions="1099780189302" href="#" target="_blank" rel="noopener" hidden><span class="pt">Adicionar ao servidor</span><span class="en">Add to server</span></a>
+          <a href="https://github.com/Harlezinhuu/HarleBot" target="_blank" rel="noopener"><span class="pt">Ver no GitHub</span><span class="en">View on GitHub</span></a>
+        </div>
+      </div>
+      <div class="art shot">
+        <img src="assets/harlebot-perfil.png" alt="Card de perfil gerado pelo Harle Bot" loading="lazy" width="1000" height="460">
+      </div>
+    </article>
   </section>
 
   <section class="wrap" aria-labelledby="n">
@@ -318,11 +349,6 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
       <span class="en">What I'm building right now.</span>
     </p>
     <div class="next">
-      <div>
-        <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
-        <h3><span class="pt">Bot de Discord</span><span class="en">Discord bot</span></h3>
-        <p><span class="pt">Música, ranking e mini-games para servidores.</span><span class="en">Music, leaderboards and mini-games for servers.</span></p>
-      </div>
       <div>
         <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
         <h3><span class="pt">Jogo de navegador</span><span class="en">Browser game</span></h3>
@@ -376,6 +402,15 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
   try{saved=localStorage.getItem('harle-lang')}catch(e){}
   set(saved || ((navigator.language||'pt').toLowerCase().indexOf('pt')===0 ? 'pt' : 'en'));
   btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+})();
+(function(){
+  // botão "Adicionar ao servidor" do Harle Bot: só aparece quando o Application ID está preenchido
+  var a=document.getElementById('convite-bot');
+  if(!a) return;
+  var id=(a.dataset.clientId||'').trim();
+  if(!/^\d{15,25}$/.test(id)) return;
+  a.href='https://discord.com/oauth2/authorize?client_id='+id+'&permissions='+a.dataset.permissions+'&scope=bot%20applications.commands';
+  a.hidden=false;
 })();
 </script>
 </body>
