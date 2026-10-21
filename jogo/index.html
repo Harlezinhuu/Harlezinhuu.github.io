@@ -88,6 +88,23 @@ button{font:inherit;color:inherit}
   font:700 .8rem var(--display);color:var(--cyan);display:none;place-items:center;touch-action:none}
 .dash.on{display:grid}
 .dash.cd{opacity:.4}
+.lb{list-style:none;padding:0;margin:18px 0 20px;text-align:left;border-top:1px solid var(--line)}
+.lb li{display:grid;grid-template-columns:2.2em 1fr auto auto;gap:12px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line);font-size:.95rem}
+.lb .pos{font:700 1rem var(--display);color:var(--silver-3);text-align:center}
+.lb li:nth-child(1) .pos{color:var(--amber)}.lb li:nth-child(2) .pos{color:var(--silver-1)}.lb li:nth-child(3) .pos{color:#d08a5a}
+.lb .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb .wv{font-size:.8rem;color:var(--muted)}
+.lb .pt2{font:700 1rem var(--display);text-align:right;min-width:5.5ch}
+.lb li.eu{background:rgba(47,212,230,.08);box-shadow:inset 3px 0 0 var(--cyan)}
+.lb .msg{display:block;text-align:center;color:var(--muted);padding:22px 0;grid-template-columns:none}
+.envio[hidden],.btn[hidden]{display:none}
+.envio{display:flex;gap:8px;justify-content:center;margin:0 auto 18px;max-width:420px}
+.envio input{flex:1;min-width:0;font:600 1rem var(--body);color:var(--text);background:#121418;border:1px solid var(--line);border-radius:8px;padding:12px 14px;-webkit-user-select:text;user-select:text}
+.envio input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+.envio .btn{padding:12px 18px;font-size:.95rem}
+.envio .btn[disabled]{opacity:.5;pointer-events:none}
+.resultado{font:600 1rem var(--display);margin:-4px 0 18px;min-height:1.4em}
+.resultado.ok{color:var(--cyan)}.resultado.erro{color:var(--red)}
 .toast{position:fixed;left:50%;top:22%;transform:translateX(-50%);font:700 clamp(1.6rem,6vw,2.6rem) var(--display);
   pointer-events:none;z-index:3;text-align:center;text-shadow:0 4px 24px rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
 .toast.show{opacity:1}
@@ -127,7 +144,10 @@ button{font:inherit;color:inherit}
       <div class="foe"><i style="background:var(--amber)"></i><b>Bloatware</b><span class="pt">se divide</span><span class="en">splits</span></div>
     </div>
     <div class="record" id="recMenu"></div>
-    <div class="row"><button class="btn" id="bJogar" type="button"><span class="pt">Jogar</span><span class="en">Play</span></button></div>
+    <div class="row">
+      <button class="btn" id="bJogar" type="button"><span class="pt">Jogar</span><span class="en">Play</span></button>
+      <button class="btn ghost so-placar" id="bPlacar" type="button" hidden><span class="pt">Placar</span><span class="en">Leaderboard</span></button>
+    </div>
     <p class="hint" id="hintPc">
       <span class="pt"><kbd>WASD</kbd> ou setas para andar · <kbd>Espaço</kbd> dash · <kbd>P</kbd> pausa · o tiro é automático</span>
       <span class="en"><kbd>WASD</kbd> or arrows to move · <kbd>Space</kbd> dash · <kbd>P</kbd> pause · shooting is automatic</span>
@@ -173,11 +193,31 @@ button{font:inherit;color:inherit}
       <div><b id="fAbates">0</b><span class="pt">abates</span><span class="en">kills</span></div>
     </div>
     <div class="record" id="recFim"></div>
+    <form class="envio so-placar" id="fEnvio" hidden autocomplete="off">
+      <label for="iNome" class="pt" style="position:absolute;left:-9999px">Seu nome</label><label for="iNome" class="en" style="position:absolute;left:-9999px">Your name</label>
+      <input id="iNome" maxlength="16" required minlength="2" enterkeyhint="send" spellcheck="false">
+      <button class="btn" id="bEnviar" type="submit"><span class="pt">Enviar pro placar</span><span class="en">Submit score</span></button>
+    </form>
+    <div class="resultado" id="resEnvio"></div>
     <div class="row">
       <button class="btn" id="bDeNovo" type="button"><span class="pt">Jogar de novo</span><span class="en">Play again</span></button>
+      <button class="btn ghost so-placar" id="bVerPlacar" type="button" hidden><span class="pt">Ver placar</span><span class="en">Leaderboard</span></button>
       <button class="btn ghost" id="bMenu" type="button">Menu</button>
     </div>
     <a class="back" href="../"><span class="pt">← Voltar ao portfólio</span><span class="en">← Back to portfolio</span></a>
+  </div>
+</div>
+
+<!-- PLACAR -->
+<div class="screen" id="sPlacar" hidden>
+  <div class="card">
+    <div class="eyebrow"><span class="pt">Melhores jogadores</span><span class="en">Top players</span></div>
+    <h2 class="title" style="font-size:clamp(2.4rem,9vw,3.6rem)"><span class="pt">Placar</span><span class="en">Leaderboard</span></h2>
+    <ol class="lb" id="lista"></ol>
+    <div class="row">
+      <button class="btn" id="bPlacarJogar" type="button"><span class="pt">Jogar</span><span class="en">Play</span></button>
+      <button class="btn ghost" id="bPlacarVoltar" type="button"><span class="pt">Voltar</span><span class="en">Back</span></button>
+    </div>
   </div>
 </div>
 
@@ -185,15 +225,25 @@ button{font:inherit;color:inherit}
 (function(){
 "use strict";
 
+/* ================= placar online (Supabase) =================
+   Preencha com os dados do seu projeto (Project Settings > API).
+   A chave "publishable"/"anon" é pública por natureza: o banco só deixa enviar e ler pelo placar.sql. */
+const PLACAR={url:'',chave:''};
+const placarLigado=/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(PLACAR.url.replace(/\/$/,''))&&PLACAR.chave.length>20;
+
 /* ================= idioma ================= */
 const root=document.documentElement;
 let lang='pt';
 try{lang=localStorage.getItem('harle-lang')||((navigator.language||'pt').toLowerCase().startsWith('pt')?'pt':'en')}catch(e){}
 const T={
   pt:{wave:'Onda',boss:'Tela Azul',bossSub:'Chefão chegando!',clear:'Onda limpa!',score:'Pontos',rec:'Recorde',recNone:'Ainda sem recorde',
-      upAfter:n=>'Onda '+n+' concluída',lv:'nível',heal:'+1 de vida',paused:'Pausado',sound:'Som',pause:'Pausar'},
+      upAfter:n=>'Onda '+n+' concluída',carregando:'Carregando…',vazio:'Ninguém no placar ainda. Seja o primeiro!',erroLista:'Não consegui carregar o placar. Tente de novo mais tarde.',
+      enviando:'Enviando…',lugar:(p,t)=>'Você ficou em #'+p+' de '+t+'!',errNome:'Use de 2 a 16 letras ou números.',errRapido:'Calma! Espere alguns segundos e tente de novo.',
+      errImp:'Essa pontuação não passou na verificação.',errRede:'Não consegui enviar. Confira sua internet.',nomePh:'Seu nome',ondaC:'onda',lv:'nível',heal:'+1 de vida',paused:'Pausado',sound:'Som',pause:'Pausar'},
   en:{wave:'Wave',boss:'Blue Screen',bossSub:'Boss incoming!',clear:'Wave cleared!',score:'Score',rec:'Record',recNone:'No record yet',
-      upAfter:n=>'Wave '+n+' cleared',lv:'level',heal:'+1 health',paused:'Paused',sound:'Sound',pause:'Pause'}
+      upAfter:n=>'Wave '+n+' cleared',carregando:'Loading…',vazio:'Nobody on the board yet. Be the first!',erroLista:"Couldn't load the leaderboard. Try again later.",
+      enviando:'Sending…',lugar:(p,t)=>"You're #"+p+' of '+t+'!',errNome:'Use 2 to 16 letters or numbers.',errRapido:'Easy! Wait a few seconds and try again.',
+      errImp:"That score didn't pass the check.",errRede:"Couldn't send it. Check your connection.",nomePh:'Your name',ondaC:'wave',lv:'level',heal:'+1 health',paused:'Paused',sound:'Sound',pause:'Pause'}
 };
 const t=k=>T[lang][k];
 function setLang(l){
@@ -201,7 +251,9 @@ function setLang(l){
   $('bLang').textContent=l==='pt'?'EN':'PT';
   $('bSom').setAttribute('aria-label',t('sound'));$('bPausa').setAttribute('aria-label',t('pause'));
   try{localStorage.setItem('harle-lang',l)}catch(e){}
+  $('iNome').placeholder=t('nomePh');
   mostrarRecorde();
+  if(!$('sPlacar').hidden) abrirPlacar(ultimoNome);
   if(!$('sUp').hidden) montarMelhorias(ofertas);
 }
 function $(id){return document.getElementById(id)}
@@ -261,7 +313,8 @@ const teclas={};
 let toque=null;            // joystick: {id,x0,y0,x,y}
 let ehToque=false;
 window.addEventListener('keydown',e=>{
-  const k=e.key.toLowerCase();teclas[k]=true;
+  if(e.target&&e.target.tagName==='INPUT') return;
+  const k=(e.key||'').toLowerCase();teclas[k]=true;
   if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) e.preventDefault();
   if(estado==='jogo'&&k===' ') pedirDash=true;
   if((k==='p'||k==='escape')&&(estado==='jogo')) pausar();
@@ -737,7 +790,7 @@ function quadro(agora){
 }
 
 /* ================= telas ================= */
-function esconderTelas(){for(const id of ['sMenu','sUp','sPausa','sFim']) $(id).hidden=true}
+function esconderTelas(){for(const id of ['sMenu','sUp','sPausa','sFim','sPlacar']) $(id).hidden=true}
 function pausar(){if(estado!=='jogo') return;estado='pausa';$('sPausa').hidden=false;$('bVoltar').focus({preventScroll:true})}
 function continuar(){if(estado!=='pausa') return;$('sPausa').hidden=true;estado='jogo';toque=null;ultimo=performance.now()}
 function irMenu(){esconderTelas();estado='menu';chefeAtual=null;$('sMenu').hidden=false;mostrarRecorde()}
@@ -748,9 +801,72 @@ function fimDeJogo(){
   $('novoRec').hidden=!novo;
   $('fPts').textContent=pontos.toLocaleString(lang==='pt'?'pt-BR':'en-US');$('fOnda').textContent=onda;$('fAbates').textContent=abates;
   mostrarRecorde();
+  prepararEnvio();
   setTimeout(()=>{if(estado==='fim'){$('sFim').hidden=false;$('bDeNovo').focus({preventScroll:true})}},700);
 }
 function alternarSom(){mudo=!mudo;try{localStorage.setItem('harle-antilag-mudo',mudo?'1':'0')}catch(e){}somIcone();if(!mudo) bip(660,.08,'triangle',.04)}
+
+/* ---------- placar ---------- */
+let ultimoNome='',enviado=false,telaAntesPlacar='sMenu';
+try{ultimoNome=localStorage.getItem('harle-antilag-nome')||''}catch(e){}
+async function api(funcao,corpo){
+  const h={'Content-Type':'application/json',apikey:PLACAR.chave};
+  if(!PLACAR.chave.startsWith('sb_')) h.Authorization='Bearer '+PLACAR.chave;   // chave antiga (JWT)
+  const r=await fetch(PLACAR.url.replace(/\/$/,'')+'/rest/v1/rpc/'+funcao,{method:'POST',headers:h,body:JSON.stringify(corpo||{})});
+  const dados=await r.json().catch(()=>null);
+  if(!r.ok){const err=new Error((dados&&dados.message)||('http_'+r.status));err.status=r.status;throw err}
+  return dados;
+}
+function fmtN(n){return Number(n).toLocaleString(lang==='pt'?'pt-BR':'en-US')}
+function linhaMsg(txt){const li=document.createElement('li');li.className='msg';li.textContent=txt;return li}
+async function abrirPlacar(destaque){
+  const ol=$('lista');ol.replaceChildren(linhaMsg(t('carregando')));
+  if($('sPlacar').hidden){telaAntesPlacar=!$('sFim').hidden?'sFim':'sMenu';esconderTelas();$('sPlacar').hidden=false;$('bPlacarVoltar').focus({preventScroll:true})}
+  try{
+    const top=await api('antilag_top',{p_limite:10});
+    ol.replaceChildren();
+    if(!top||!top.length){ol.append(linhaMsg(t('vazio')));return}
+    for(const r of top){
+      const li=document.createElement('li');
+      if(destaque&&r.nome.toLowerCase()===destaque.toLowerCase()) li.className='eu';
+      const pos=document.createElement('span');pos.className='pos';pos.textContent=r.posicao;
+      const nm=document.createElement('span');nm.className='nm';nm.textContent=r.nome;
+      const wv=document.createElement('span');wv.className='wv';wv.textContent=t('ondaC')+' '+r.onda;
+      const pt=document.createElement('span');pt.className='pt2';pt.textContent=fmtN(r.pontos);
+      li.append(pos,nm,wv,pt);ol.append(li);
+    }
+  }catch(e){ol.replaceChildren(linhaMsg(t('erroLista')))}
+}
+function prepararEnvio(){
+  enviado=false;
+  const res=$('resEnvio');res.textContent='';res.className='resultado';
+  const pode=placarLigado&&pontos>0;
+  $('fEnvio').hidden=!pode;$('bEnviar').disabled=false;
+  $('iNome').value=ultimoNome;
+}
+$('fEnvio').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  if(enviado) return;
+  const nome=$('iNome').value.trim().replace(/\s+/g,' ');
+  const res=$('resEnvio');
+  if(!/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 _.\-]{2,16}$/.test(nome)){res.className='resultado erro';res.textContent=t('errNome');return}
+  $('bEnviar').disabled=true;res.className='resultado';res.textContent=t('enviando');
+  try{
+    const r=await api('antilag_enviar',{p_nome:nome,p_pontos:pontos,p_onda:onda,p_abates:abates,p_duracao:Math.max(1,Math.round(tempoTotal))});
+    enviado=true;ultimoNome=nome;try{localStorage.setItem('harle-antilag-nome',nome)}catch(e){}
+    $('fEnvio').hidden=true;res.className='resultado ok';res.textContent=T[lang].lugar(r.posicao,r.total);
+    try{if(window.goatcounter&&goatcounter.count) goatcounter.count({path:'jogo-placar-envio',title:'Pontuação enviada',event:true})}catch(e){}
+  }catch(e){
+    $('bEnviar').disabled=false;res.className='resultado erro';
+    const m=e.message||'';
+    res.textContent=m.includes('nome_invalido')?t('errNome'):m.includes('muito_rapido')?t('errRapido'):m.includes('impossivel')||m.includes('dados_invalidos')?t('errImp'):t('errRede');
+  }
+});
+if(placarLigado) document.querySelectorAll('.so-placar').forEach(el=>{if(el.id!=='fEnvio') el.hidden=false});
+$('bPlacar').addEventListener('click',()=>abrirPlacar(ultimoNome));
+$('bVerPlacar').addEventListener('click',()=>abrirPlacar(ultimoNome));
+$('bPlacarVoltar').addEventListener('click',()=>{esconderTelas();$(telaAntesPlacar).hidden=false;if(telaAntesPlacar==='sMenu') estado='menu'});
+$('bPlacarJogar').addEventListener('click',iniciar);
 
 $('bJogar').addEventListener('click',iniciar);
 $('bDeNovo').addEventListener('click',iniciar);
