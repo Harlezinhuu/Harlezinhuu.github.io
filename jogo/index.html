@@ -366,11 +366,18 @@ const MELHORIAS=[
   {id:'dsh', c:'#4c8dff',max:3, pt:['Boot rápido','Dash recarrega 30% mais rápido'],en:['Fast boot','Dash recharges 30% faster'],ap:p=>{p.dashMax*=.7}},
   {id:'ima', c:'#5be37d',max:3, pt:['Wi-Fi 6','Puxa itens de longe'],en:['Wi-Fi 6','Pulls pickups from afar'],ap:p=>{p.ima++}}
 ];
+const INFINITAS=[
+  {id:'cura',c:'#5be37d',max:99,pt:['Limpeza de disco','Cura toda a vida'],en:['Disk cleanup','Full heal'],ap:p=>{p.vida=p.vidaMax}},
+  {id:'fw',  c:'#e0479e',max:99,pt:['Atualizar drivers','+10% de dano (sem limite)'],en:['Update drivers','+10% damage (no limit)'],ap:p=>{p.dano*=1.1}},
+  {id:'bk',  c:'#f2a93b',max:99,pt:['Backup na nuvem','+1.000 pontos'],en:['Cloud backup','+1,000 points'],ap:()=>{pontos+=1000}}
+];
 function sortearMelhorias(){
   const livres=MELHORIAS.filter(m=>(P.niveis[m.id]||0)<m.max);
-  if(P.vida<P.vidaMax&&!livres.some(m=>m.id==='ram')) livres.push({id:'cura',c:'#5be37d',max:99,pt:['Limpeza de disco','Cura toda a vida'],en:['Disk cleanup','Full heal'],ap:p=>{p.vida=p.vidaMax}});
+  if(P.vida<P.vidaMax&&!livres.some(m=>m.id==='ram')) livres.push(INFINITAS[0]);
   const out=[];
   while(out.length<3&&livres.length) out.push(livres.splice(Math.floor(Math.random()*livres.length),1)[0]);
+  // tudo no máximo: completa com melhorias que nunca acabam (antes a tela ficava vazia e o jogo travava)
+  for(const m of INFINITAS){if(out.length>=3) break;if(!out.includes(m)) out.push(m)}
   return out;
 }
 function montarMelhorias(lista){
@@ -387,7 +394,10 @@ function montarMelhorias(lista){
   });
 }
 function abrirMelhorias(){
-  estado='melhoria';ofertas=sortearMelhorias();
+  if(pontos>recorde){recorde=pontos;try{localStorage.setItem('harle-antilag-recorde',String(recorde))}catch(e){}}  // salva a cada onda, não só no game over
+  ofertas=sortearMelhorias();
+  if(!ofertas.length){proximaOnda();return}   // garantia extra: nunca travar sem opções
+  estado='melhoria';
   $('upTitulo').textContent=T[lang].upAfter(onda);
   montarMelhorias(ofertas);$('sUp').hidden=false;
   setTimeout(()=>{const b=$('ups').querySelector('button');if(b) b.focus({preventScroll:true})},50);
