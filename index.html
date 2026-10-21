@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harle — Portfólio</title>
-<meta name="description" content="Projetos do Harle: otimizador de FPS, player de música e assistente pessoal.">
+<meta name="description" content="Projetos do Harle: otimizador de FPS, player de música, assistente pessoal, bot de Discord e um jogo para jogar no navegador.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23eef1f5'/%3E%3Cstop offset='.55' stop-color='%238a919c'/%3E%3Cstop offset='1' stop-color='%23d3d8df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 3 57 17.5v29L32 61 7 46.5v-29z' fill='%2316181d' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M23 19v26M41 19v26M23 32h18' stroke='%234c8dff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
   --magenta:#e0479e;     /* Harle Player */
   --amber:#f2a93b;       /* Jarvis */
   --violet:#8b7bff;      /* Harle Bot */
+  --green:#5be37d;       /* Anti-Lag (jogo) */
   --silver:linear-gradient(105deg,var(--silver-2) 0%,var(--silver-1) 28%,var(--silver-3) 52%,var(--silver-1) 74%,var(--silver-2) 100%);
   --radius-sm:6px;
   --radius-lg:14px;
@@ -99,6 +100,9 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 .project.player{--accent:var(--magenta)}
 .project.jarvis{--accent:var(--amber)}
 .project.bot{--accent:var(--violet)}
+.project.jogo{--accent:var(--green)}
+.links a.play{background:var(--green);color:#10261a;border:0;padding:8px 16px;border-radius:var(--radius-sm)}
+.links a.play:hover{color:#10261a;background:#78ec95}
 .project.bot .art{aspect-ratio:1000/460}
 .project.bot .art.shot img{object-fit:contain}
 .links a[hidden]{display:none}
@@ -122,6 +126,7 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 
 /* em breve */
 .next{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
+.next.um{grid-template-columns:1fr}
 .next div{padding:26px 22px 8px 0}
 .next div + div{padding-left:22px;border-left:1px solid var(--line)}
 .next h3{font:600 1.2rem var(--display);margin-bottom:6px}
@@ -181,8 +186,8 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
       <span class="en">I build apps for people who game, listen to music, and like their PC set up their way.</span>
     </p>
     <p class="sub">
-      <span class="pt">Otimizador de FPS, player de música, assistente pessoal e um bot de Discord completo. Tudo feito por mim, com o código no GitHub.</span>
-      <span class="en">An FPS optimizer, a music player, a personal assistant and a full Discord bot. All built by me, with the code on GitHub.</span>
+      <span class="pt">Otimizador de FPS, player de música, assistente pessoal, um bot de Discord completo e até um jogo que roda aqui no site. Tudo feito por mim, com o código no GitHub.</span>
+      <span class="en">An FPS optimizer, a music player, a personal assistant, a full Discord bot and even a game that runs right here on the site. All built by me, with the code on GitHub.</span>
     </p>
     <div class="actions">
       <a class="btn primary" href="#projetos"><span class="pt">Ver projetos</span><span class="en">See projects</span></a>
@@ -340,6 +345,30 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
         <img src="assets/harlebot-perfil.png" alt="Card de perfil gerado pelo Harle Bot" loading="lazy" width="1000" height="460">
       </div>
     </article>
+    <!-- ANTI-LAG (jogo) -->
+    <article class="project jogo">
+      <div>
+        <div class="kind"><span class="pt">Jogo de navegador</span><span class="en">Browser game</span></div>
+        <h3>Harle: Anti-Lag</h3>
+        <p>
+          <span class="pt">Seu PC foi invadido por lag, bugs, bloatware e pop-ups. Sobreviva às ondas, escolha melhorias de hardware como Overclock e Mais RAM e derrube a Tela Azul. Roda aqui mesmo, no PC ou no celular.</span>
+          <span class="en">Your PC got invaded by lag, bugs, bloatware and pop-ups. Survive the waves, pick hardware upgrades like Overclock and More RAM, and take down the Blue Screen. Runs right here, on desktop or phone.</span>
+        </p>
+        <ul class="tags">
+          <li>JavaScript</li>
+          <li>Canvas</li>
+          <li><span class="pt">PC e celular</span><span class="en">Desktop &amp; mobile</span></li>
+          <li><span class="pt">Sem instalar nada</span><span class="en">Nothing to install</span></li>
+        </ul>
+        <div class="links">
+          <a class="play" data-goatcounter-click="jogo-jogar" href="jogo/"><span class="pt">Jogar agora</span><span class="en">Play now</span></a>
+          <a data-goatcounter-click="jogo-codigo" href="https://github.com/Harlezinhuu/Harlezinhuu.github.io/blob/main/jogo/index.html" target="_blank" rel="noopener"><span class="pt">Ver código</span><span class="en">View code</span></a>
+        </div>
+      </div>
+      <a class="art shot" href="jogo/" data-goatcounter-click="jogo-imagem" aria-label="Jogar Harle: Anti-Lag">
+        <img src="assets/antilag.jpg" alt="Partida do Harle: Anti-Lag" loading="lazy" width="960" height="600">
+      </a>
+    </article>
   </section>
 
   <section class="wrap" aria-labelledby="n">
@@ -348,12 +377,7 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
       <span class="pt">O que estou construindo agora.</span>
       <span class="en">What I'm building right now.</span>
     </p>
-    <div class="next">
-      <div>
-        <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
-        <h3><span class="pt">Jogo de navegador</span><span class="en">Browser game</span></h3>
-        <p><span class="pt">Jogável direto aqui no site, sem instalar nada.</span><span class="en">Playable right here on the site, nothing to install.</span></p>
-      </div>
+    <div class="next um">
       <div>
         <span class="soon"><span class="pt">Em breve</span><span class="en">Soon</span></span>
         <h3><span class="pt">Ferramenta de terminal</span><span class="en">Command-line tool</span></h3>
