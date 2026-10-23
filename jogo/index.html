@@ -153,6 +153,7 @@ button{font:inherit;color:inherit}
     <div class="record" id="recMenu"></div>
     <div class="row">
       <button class="btn" id="bJogar" type="button"><span class="pt">Jogar</span><span class="en">Play</span></button>
+      <button class="btn ghost" id="bPendente" type="button" hidden></button>
       <button class="btn ghost so-placar" id="bPlacar" type="button" hidden><span class="pt">Placar</span><span class="en">Leaderboard</span></button>
     </div>
     <p class="hint" id="hintPc">
@@ -246,11 +247,11 @@ const T={
   pt:{wave:'Onda',boss:'Tela Azul',bossSub:'Chefão chegando!',clear:'Onda limpa!',score:'Pontos',rec:'Recorde',recNone:'Ainda sem recorde',
       upAfter:n=>'Onda '+n+' concluída',carregando:'Carregando…',vazio:'Ninguém no placar ainda. Seja o primeiro!',erroLista:'Não consegui carregar o placar. Tente de novo mais tarde.',
       enviando:'Enviando…',lugar:(p,t)=>'Você ficou em #'+p+' de '+t+'!',errNome:'Use de 2 a 16 letras ou números.',errRapido:'Calma! Espere alguns segundos e tente de novo.',
-      errImp:'Essa pontuação não passou na verificação.',errRede:'Não consegui enviar. Confira sua internet.',nomePh:'Seu nome',ondaC:'onda',lv:'nível',heal:'+1 de vida',paused:'Pausado',sound:'Som',pause:'Pausar'},
+      errImp:'Essa pontuação não passou na verificação.',errRede:'Não consegui enviar. Confira sua internet.',errServ:'O placar recusou o envio. A partida ficou salva para enviar depois pelo menu.',nomePh:'Seu nome',ondaC:'onda',lv:'nível',heal:'+1 de vida',paused:'Pausado',sound:'Som',pause:'Pausar'},
   en:{wave:'Wave',boss:'Blue Screen',bossSub:'Boss incoming!',clear:'Wave cleared!',score:'Score',rec:'Record',recNone:'No record yet',
       upAfter:n=>'Wave '+n+' cleared',carregando:'Loading…',vazio:'Nobody on the board yet. Be the first!',erroLista:"Couldn't load the leaderboard. Try again later.",
       enviando:'Sending…',lugar:(p,t)=>"You're #"+p+' of '+t+'!',errNome:'Use 2 to 16 letters or numbers.',errRapido:'Easy! Wait a few seconds and try again.',
-      errImp:"That score didn't pass the check.",errRede:"Couldn't send it. Check your connection.",nomePh:'Your name',ondaC:'wave',lv:'level',heal:'+1 health',paused:'Paused',sound:'Sound',pause:'Pause'}
+      errImp:"That score didn't pass the check.",errRede:"Couldn't send it. Check your connection.",errServ:"The leaderboard rejected it. Your run was saved so you can send it later from the menu.",nomePh:'Your name',ondaC:'wave',lv:'level',heal:'+1 health',paused:'Paused',sound:'Sound',pause:'Pause'}
 };
 const t=k=>T[lang][k];
 function setLang(l){
@@ -800,7 +801,7 @@ function quadro(agora){
 function esconderTelas(){for(const id of ['sMenu','sUp','sPausa','sFim','sPlacar']) $(id).hidden=true}
 function pausar(){if(estado!=='jogo') return;estado='pausa';$('sPausa').hidden=false;$('bVoltar').focus({preventScroll:true})}
 function continuar(){if(estado!=='pausa') return;$('sPausa').hidden=true;estado='jogo';toque=null;ultimo=performance.now()}
-function irMenu(){esconderTelas();estado='menu';chefeAtual=null;$('sMenu').hidden=false;mostrarRecorde()}
+function irMenu(){esconderTelas();estado='menu';chefeAtual=null;$('sMenu').hidden=false;mostrarRecorde();if(typeof mostrarBotaoPendente==='function') mostrarBotaoPendente()}
 function fimDeJogo(){
   estado='fim';som.fim();tremer(14);
   const novo=pontos>recorde;
@@ -819,9 +820,13 @@ try{ultimoNome=localStorage.getItem('harle-antilag-nome')||''}catch(e){}
 async function api(funcao,corpo){
   const h={'Content-Type':'application/json',apikey:PLACAR.chave};
   if(!PLACAR.chave.startsWith('sb_')) h.Authorization='Bearer '+PLACAR.chave;   // chave antiga (JWT)
-  const r=await fetch(PLACAR.url.replace(/\/$/,'')+'/rest/v1/rpc/'+funcao,{method:'POST',headers:h,body:JSON.stringify(corpo||{})});
+  let r;
+  try{r=await fetch(PLACAR.url.replace(/\/$/,'')+'/rest/v1/rpc/'+funcao,{method:'POST',headers:h,body:JSON.stringify(corpo||{})})}
+  catch(e){const err=new Error('sem_conexao');err.detalhe=String(e&&e.message||e);throw err}
   const dados=await r.json().catch(()=>null);
-  if(!r.ok){const err=new Error((dados&&dados.message)||('http_'+r.status));err.status=r.status;throw err}
+  if(!r.ok){const err=new Error((dados&&dados.message)||('http_'+r.status));err.status=r.status;
+    err.detalhe='HTTP '+r.status+(dados&&dados.code?' · '+dados.code:'')+(dados&&dados.message?' · '+dados.message:'');
+    console.error('[placar]',funcao,r.status,dados);throw err}
   return dados;
 }
 function fmtN(n){return Number(n).toLocaleString(lang==='pt'?'pt-BR':'en-US')}
@@ -842,7 +847,7 @@ async function abrirPlacar(destaque){
       const pt=document.createElement('span');pt.className='pt2';pt.textContent=fmtN(r.pontos);
       li.append(pos,nm,wv,pt);ol.append(li);
     }
-  }catch(e){ol.replaceChildren(linhaMsg(t('erroLista')))}
+  }catch(e){ol.replaceChildren(linhaMsg(t('erroLista')+(e.detalhe?' ('+e.detalhe+')':'')))}
 }
 function prepararEnvio(){
   enviado=false;
@@ -857,20 +862,42 @@ $('fEnvio').addEventListener('submit',async ev=>{
   const nome=$('iNome').value.trim().replace(/\s+/g,' ');
   const res=$('resEnvio');
   if(!/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 _.\-]{2,16}$/.test(nome)){res.className='resultado erro';res.textContent=t('errNome');return}
+  ultimoNome=nome;try{localStorage.setItem('harle-antilag-nome',nome)}catch(e){}
   $('bEnviar').disabled=true;res.className='resultado';res.textContent=t('enviando');
   try{
     const r=await api('antilag_enviar',{p_nome:nome,p_pontos:pontos,p_onda:onda,p_abates:abates,p_duracao:Math.max(1,Math.round(tempoTotal))});
-    enviado=true;ultimoNome=nome;try{localStorage.setItem('harle-antilag-nome',nome)}catch(e){}
+    enviado=true;ultimoNome=nome;try{localStorage.setItem('harle-antilag-nome',nome);localStorage.removeItem('harle-antilag-pendente')}catch(e){}
+    $('bPendente').hidden=true;
     $('fEnvio').hidden=true;res.className='resultado ok';res.textContent=T[lang].lugar(r.posicao,r.total);
     try{if(window.goatcounter&&goatcounter.count) goatcounter.count({path:'jogo-placar-envio',title:'Pontuação enviada',event:true})}catch(e){}
   }catch(e){
     $('bEnviar').disabled=false;res.className='resultado erro';
     const m=e.message||'';
-    res.textContent=m.includes('nome_invalido')?t('errNome'):m.includes('muito_rapido')?t('errRapido'):m.includes('impossivel')||m.includes('dados_invalidos')?t('errImp'):t('errRede');
+    const conhecido=m.includes('nome_invalido')?t('errNome'):m.includes('muito_rapido')?t('errRapido'):m.includes('impossivel')||m.includes('dados_invalidos')?t('errImp'):null;
+    res.textContent=conhecido||(m==='sem_conexao'?t('errRede'):t('errServ'));
+    if(!conhecido){
+      // guarda a partida para tentar de novo depois (pelo menu)
+      try{localStorage.setItem('harle-antilag-pendente',JSON.stringify({pontos,onda,abates,dur:Math.max(1,Math.round(tempoTotal))}))}catch(_){}
+      if(e.detalhe){const d=document.createElement('small');d.style.cssText='display:block;font:500 .78rem var(--body);color:var(--silver-3);margin-top:4px';d.textContent=e.detalhe;res.append(d)}
+    }
   }
 });
 if(placarLigado) document.querySelectorAll('.so-placar').forEach(el=>{if(el.id!=='fEnvio') el.hidden=false});
 $('bPlacar').addEventListener('click',()=>abrirPlacar(ultimoNome));
+// partida que não conseguiu ser enviada: dá para mandar de novo pelo menu
+function lerPendente(){try{const x=JSON.parse(localStorage.getItem('harle-antilag-pendente')||'null');return x&&x.pontos>0?x:null}catch(e){return null}}
+function mostrarBotaoPendente(){
+  const pd=placarLigado&&lerPendente();$('bPendente').hidden=!pd;
+  if(pd) $('bPendente').textContent=(lang==='pt'?'Enviar partida salva (':'Send saved run (')+fmtN(pd.pontos)+')';
+}
+$('bPendente').addEventListener('click',()=>{
+  const pd=lerPendente();if(!pd) return;
+  if(!P){P=novoJogador();inimigos=[];tiros=[];tirosInim=[];particulas=[];coletas=[];textos=[];avisos=[]}
+  pontos=pd.pontos;onda=pd.onda;abates=pd.abates;tempoTotal=pd.dur;estado='fim';
+  $('fPts').textContent=fmtN(pontos);$('fOnda').textContent=onda;$('fAbates').textContent=abates;$('novoRec').hidden=true;
+  prepararEnvio();esconderTelas();$('sFim').hidden=false;$('iNome').focus({preventScroll:true});
+});
+mostrarBotaoPendente();
 $('bVerPlacar').addEventListener('click',()=>abrirPlacar(ultimoNome));
 $('bPlacarVoltar').addEventListener('click',()=>{esconderTelas();$(telaAntesPlacar).hidden=false;if(telaAntesPlacar==='sMenu') estado='menu'});
 $('bPlacarJogar').addEventListener('click',iniciar);
