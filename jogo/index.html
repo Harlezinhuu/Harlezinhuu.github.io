@@ -6,6 +6,13 @@
 <title>Harle: Anti-Lag</title>
 <meta name="description" content="Jogo de navegador do Harle: proteja o PC contra lag, bugs, bloatware e pop-ups. Joga no PC e no celular.">
 <meta name="theme-color" content="#16181d">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://harlezinhuu.github.io/jogo/">
+<meta property="og:title" content="Harle: Anti-Lag">
+<meta property="og:description" content="Proteja o PC contra lag, bugs, bloatware e pop-ups. Joga no PC e no celular, sem instalar nada. Será que você chega no topo do placar?">
+<meta property="og:image" content="https://harlezinhuu.github.io/assets/og-jogo.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 3 57 17.5v29L32 61 7 46.5v-29z' fill='%2316181d' stroke='%23a9b0ba' stroke-width='4'/%3E%3Cpath d='M23 19v26M41 19v26M23 32h18' stroke='%232fd4e6' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -228,7 +235,7 @@ button{font:inherit;color:inherit}
 /* ================= placar online (Supabase) =================
    Preencha com os dados do seu projeto (Project Settings > API).
    A chave "publishable"/"anon" é pública por natureza: o banco só deixa enviar e ler pelo placar.sql. */
-const PLACAR={url:'',chave:''};
+const PLACAR={url:'https://mtskvhwoifudsuzbuokj.supabase.co',chave:'sb_publishable_CNc_IVIdj3zWdriG631__g_58tANW0J'};
 const placarLigado=/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(PLACAR.url.replace(/\/$/,''))&&PLACAR.chave.length>20;
 
 /* ================= idioma ================= */
