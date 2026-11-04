@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ateliê Maré · Moda feminina (site de exemplo)</title>
+<meta name="description" content="Exemplo de site para loja de roupas feito por Harle: coleção em destaque, provador pelo WhatsApp, trocas e entrega claras.">
+<meta property="og:title" content="Ateliê Maré · site de exemplo para loja de roupas">
+<meta property="og:description" content="Exemplo de site para loja de roupas feito por Harle.">
+<meta name="theme-color" content="#F2EEE8">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161616'/%3E%3Cpath d='M12 40q10-12 20 0t20 0' stroke='%23E7C9A9' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+:root{
+  --fundo:#F2EEE8; --fundo-foto:#E7DFD4; --cartao:#FBF9F6; --linha:#DCD3C7;
+  --texto:#161616; --suave:#57524C; --marca:#9A3412;
+  --acao:#161616; --acao-forte:#000; --sobre-acao:#fff;
+  --titulo:"Playfair Display",Georgia,serif; --corpo:"Lato",system-ui,sans-serif;
+}
+.hero h1 em{color:var(--marca)}
+.hero .arte{border-radius:220px 220px 24px 24px;background:#E7DFD4}
+.faixa{background:var(--texto);color:#F2EEE8;overflow:hidden;white-space:nowrap;padding:14px 0;font:600 1.1rem var(--titulo);font-style:italic}
+.faixa div{display:inline-block;animation:corre 28s linear infinite}
+.faixa span{margin:0 28px}
+@keyframes corre{to{transform:translateX(-50%)}}
+.vestido{transform-origin:200px 90px;animation:balanca 6s ease-in-out infinite}
+@keyframes balanca{50%{transform:rotate(1.6deg)}}
+.provador{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:center}
+.medidas{width:100%;border-collapse:collapse;background:var(--cartao);border-radius:16px;overflow:hidden}
+.medidas th,.medidas td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--linha)}
+.medidas th{font-weight:700;background:#E7DFD4}
+@media (max-width:760px){.provador{grid-template-columns:1fr}}
+.produto h3{font-weight:600}
+</style>
+</head>
+<body data-horario="1-6 10:00-19:00">
+
+<div class="demo">Loja fictícia · exemplo de site feito por Harle. <a href="../../#lojas">Quero um assim para a minha loja →</a></div>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#161616"/><path d="M12 40q10-12 20 0t20 0" stroke="#E7C9A9" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+      Ateliê Maré
+    </a>
+    <nav><a href="#colecao">Coleção</a><a href="#provador">Provador</a><a href="#onde">Loja</a></nav>
+    <a class="btn zap pequeno" href="#" data-zap="ver a coleção">Comprar pelo WhatsApp</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p style="font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;color:var(--marca);margin-bottom:16px">Coleção Verão · peças em linho</p>
+        <h1>Leve como <em>fim de tarde</em> na praia.</h1>
+        <p class="frase">Moda feminina feita em pequenas tiragens, do P ao GG. Escolha aqui, tire as dúvidas de tamanho no WhatsApp e receba em casa.</p>
+        <div class="acoes">
+          <a class="btn zap" href="#" data-zap="ver a coleção"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg>Comprar pelo WhatsApp</a>
+          <a class="btn linha" href="#colecao">Ver a coleção</a>
+        </div>
+        <div class="prova"><span>★ <b>5,0</b> no Google</span><span><b>Troca fácil</b> em 30 dias</span><span>Centro</span><span class="exemplo">números de exemplo</span></div>
+      </div>
+      <div class="arte" aria-hidden="true">
+        <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid meet">
+          <rect width="400" height="480" fill="#E7DFD4"/>
+          <circle cx="300" cy="120" r="54" fill="#EBC7A0"/>
+          <path d="M200 70v24" stroke="#57524C" stroke-width="3"/>
+          <path d="M150 96h100" stroke="#57524C" stroke-width="5" stroke-linecap="round"/>
+          <g class="vestido">
+            <path d="M172 100q28 18 56 0l14 70q-4 10-14 14l64 236H108l64-236q-10-4-14-14Z" fill="#9A3412"/>
+            <path d="M158 170q42 20 84 0" stroke="#7C2D12" stroke-width="5" fill="none"/>
+            <path d="M150 420q30-20 50 0t50 0 56 0" stroke="#7C2D12" stroke-width="3" fill="none" opacity=".6"/>
+          </g>
+          <path d="M0 440q100-26 200 0t200 0v40H0Z" fill="#DCD3C7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="faixa" aria-hidden="true"><div><span>Nova coleção</span>✦<span>Linho e algodão</span>✦<span>Do P ao GG</span>✦<span>Troca em 30 dias</span>✦<span>Nova coleção</span>✦<span>Linho e algodão</span>✦<span>Do P ao GG</span>✦<span>Troca em 30 dias</span>✦</div></div>
+
+  <section id="colecao">
+    <div class="wrap">
+      <h2 class="surge">A coleção</h2>
+      <p class="lead surge">Seis peças que combinam entre si. Toque em "Quero" e a gente separa o seu tamanho.</p>
+      <ul class="produtos">
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><path d="M84 30q16 10 32 0l8 40-8 4 34 106H50l34-106-8-4Z" fill="#9A3412"/></svg></div><div class="info"><h3>Vestido Areia</h3><p>Linho, alcinha, midi.</p><div class="preco">R$ 289 <button class="pedir" data-zap="o Vestido Areia">Quero</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><path d="M70 40l-36 26 14 26 16-10v88h72V82l16 10 14-26-36-26q-14 14-30 14t-30-14Z" fill="#F7F3EC" stroke="#DCD3C7" stroke-width="2"/><path d="M100 54v116" stroke="#DCD3C7" stroke-width="2"/></svg></div><div class="info"><h3>Camisa Brisa</h3><p>Linho cru, botão de coco.</p><div class="preco">R$ 219 <button class="pedir" data-zap="a Camisa Brisa">Quero</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><path d="M70 46h60l24 128H46Z" fill="#3F4A3C"/><path d="M70 46h60v10H70Z" fill="#2F382D"/></svg></div><div class="info"><h3>Saia Restinga</h3><p>Midi, cintura alta, com bolso.</p><div class="preco">R$ 199 <button class="pedir" data-zap="a Saia Restinga">Quero</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><path d="M70 84q0-40 30-40t30 40" stroke="#8B5E34" stroke-width="7" fill="none"/><rect x="50" y="80" width="100" height="84" rx="14" fill="#C08A5B"/><rect x="92" y="100" width="16" height="10" rx="2" fill="#E7C9A9"/></svg></div><div class="info"><h3>Bolsa Duna</h3><p>Couro vegetal, cabe tudo.</p><div class="preco">R$ 249 <button class="pedir" data-zap="a Bolsa Duna">Quero</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><path d="M40 130q30-6 60-4l50 10q10 4 6 12H44q-10-6-4-18Z" fill="#C08A5B"/><path d="M70 128q10-30 30-30M90 128q8-22 26-24" stroke="#8B5E34" stroke-width="6" fill="none" stroke-linecap="round"/></svg></div><div class="info"><h3>Sandália Concha</h3><p>Rasteira, tiras trançadas.</p><div class="preco">R$ 159 <button class="pedir" data-zap="a Sandália Concha">Quero</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E7DFD4"/><g fill="none" stroke="#C9A227" stroke-width="5"><circle cx="76" cy="110" r="24"/><circle cx="124" cy="110" r="24"/><path d="M76 72v14M124 72v14"/></g></svg></div><div class="info"><h3>Argola Maré</h3><p>Banho de ouro, levinha.</p><div class="preco">R$ 89 <button class="pedir" data-zap="a Argola Maré">Quero</button></div></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="provador">
+    <div class="wrap provador">
+      <div class="surge">
+        <h2>Provador pelo WhatsApp</h2>
+        <p class="lead" style="margin-bottom:24px">Em dúvida no tamanho? Manda as suas medidas que a gente indica a peça certa. E se não servir, troca em 30 dias.</p>
+        <a class="btn zap" href="#" data-zap="ajuda com o tamanho">Pedir ajuda com o tamanho</a>
+      </div>
+      <table class="medidas surge">
+        <caption style="caption-side:top;text-align:left;font-weight:700;padding-bottom:10px">Tabela de medidas (cm)</caption>
+        <thead><tr><th>Tam.</th><th>Busto</th><th>Cintura</th><th>Quadril</th></tr></thead>
+        <tbody><tr><td>P</td><td>84–88</td><td>66–70</td><td>92–96</td></tr><tr><td>M</td><td>89–94</td><td>71–76</td><td>97–102</td></tr><tr><td>G</td><td>95–100</td><td>77–82</td><td>103–108</td></tr><tr><td>GG</td><td>101–108</td><td>83–90</td><td>109–116</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="surge">Como comprar</h2>
+      <ol class="passos">
+        <li class="surge"><h3>Escolha a peça</h3><p>Toque em "Quero" e diga o tamanho.</p></li>
+        <li class="surge"><h3>Pague no Pix ou cartão</h3><p>Em até 3 vezes sem juros.</p></li>
+        <li class="surge"><h3>Receba ou retire</h3><p>Entrega na cidade em 1 dia útil, Correios para o Brasil.</p></li>
+      </ol>
+      <ul class="condicoes surge"><li>Frete grátis acima de R$ 299</li><li>Troca em 30 dias</li><li>Pix, cartão em 3x</li></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="avaliacoes surge">
+        <div><div class="nota">5,0</div><div class="estrelas" aria-label="5 estrelas">★★★★★</div></div>
+        <p><b>Aqui entram as avaliações reais do Google da sua loja.</b> No site de verdade, mostramos o que as clientes já escreveram, com nome e data. Nada inventado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="onde">
+    <div class="wrap onde">
+      <div class="mapa surge" aria-hidden="true">
+        <svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#E7DFD4"/><g stroke="#FBF9F6" stroke-width="14"><path d="M0 100h400M0 200h400M140 0v300M260 0v300"/></g><path d="M200 120c-14 0-24 10-24 23 0 18 24 39 24 39s24-21 24-39c0-13-10-23-24-23Z" fill="#9A3412"/><circle cx="200" cy="143" r="8" fill="#fff"/></svg>
+      </div>
+      <div class="surge">
+        <h2>A loja</h2>
+        <p class="aberto" data-aberto><i></i><span>Horário</span></p>
+        <dl style="margin-top:22px">
+          <div><dt>Endereço</dt><dd>Rua do Porto, 33 · Centro (endereço de exemplo)</dd></div>
+          <div><dt>Horário</dt><dd>Segunda a sábado, 10h às 19h</dd></div>
+          <div><dt>Telefone</dt><dd><a href="#" data-zap="">(00) 0000-0000</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap"><span>Ateliê Maré · loja fictícia, criada para mostrar o trabalho · Trocas em 30 dias</span><span>Site por <a href="../../#lojas">Harle</a></span></div>
+</footer>
+
+<button class="zap-fixo" type="button" data-zap="" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg></button>
+
+<script src="../base.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bigode Pet · Pet shop e banho e tosa (site de exemplo)</title>
+<meta name="description" content="Exemplo de site para pet shop feito por Harle: banho e tosa com horário pelo WhatsApp, ração com entrega e produtos em destaque.">
+<meta property="og:title" content="Bigode Pet · site de exemplo para pet shop">
+<meta property="og:description" content="Exemplo de site para pet shop feito por Harle.">
+<meta name="theme-color" content="#F3F7F5">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%230F766E'%3E%3Cellipse cx='32' cy='42' rx='14' ry='12'/%3E%3Ccircle cx='16' cy='26' r='6'/%3E%3Ccircle cx='26' cy='16' r='6'/%3E%3Ccircle cx='38' cy='16' r='6'/%3E%3Ccircle cx='48' cy='26' r='6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+:root{
+  --fundo:#F3F7F5; --fundo-foto:#E2EFEA; --cartao:#FFFFFF; --linha:#D5E4DE;
+  --texto:#10231F; --suave:#4A615B; --marca:#0F766E;
+  --acao:#6D28D9; --acao-forte:#5B21B6; --sobre-acao:#fff;
+  --titulo:"Bricolage Grotesque",system-ui,sans-serif; --corpo:"Inter",system-ui,sans-serif;
+}
+.hero h1{letter-spacing:-.03em;font-size:clamp(2.7rem,7vw,5.2rem)}
+.bento a:last-child{grid-column:span 2}
+.hero h1 span{color:var(--marca)}
+.selo{display:inline-flex;align-items:center;gap:8px;background:#FEF3C7;color:#78350F;font-weight:600;padding:6px 14px;border-radius:999px;margin-bottom:18px;font-size:.95rem}
+#patas{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+#patas svg{position:absolute;width:26px;height:26px;color:var(--marca);opacity:.5;transition:opacity .9s ease-out,transform .9s ease-out}
+.banho{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.banho .plano{background:var(--cartao);border:1px solid var(--linha);border-radius:24px;padding:26px}
+.banho .plano.destaque{border:2px solid var(--marca)}
+.banho h3{font-size:1.4rem;margin-bottom:6px}
+.banho .valor{font:800 2rem var(--titulo);margin:10px 0}
+.banho ul{padding-left:18px;color:var(--suave);margin-bottom:18px}
+@media (max-width:760px){.banho{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-horario="1-5 08:00-19:00; 6 08:00-17:00">
+
+<div class="demo">Loja fictícia · exemplo de site feito por Harle. <a href="../../#lojas">Quero um assim para a minha loja →</a></div>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="#0F766E"><ellipse cx="32" cy="42" rx="14" ry="12"/><circle cx="16" cy="26" r="6"/><circle cx="26" cy="16" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="48" cy="26" r="6"/></g></svg>
+      Bigode Pet
+    </a>
+    <nav><a href="#banho">Banho e tosa</a><a href="#produtos">Produtos</a><a href="#onde">Onde estamos</a></nav>
+    <a class="btn zap pequeno" href="#" data-zap="marcar um banho">Marcar banho</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="topo">
+    <div id="patas" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <div class="selo">Leva e traz grátis no bairro</div>
+        <h1>Banho, tosa e carinho <span>pro seu melhor amigo.</span></h1>
+        <p class="frase">Pet shop com banho e tosa, ração com entrega no mesmo dia e veterinário às terças. Marque o horário pelo WhatsApp em um minuto.</p>
+        <div class="acoes">
+          <a class="btn zap" href="#" data-zap="marcar um banho"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg>Marcar banho e tosa</a>
+          <a class="btn linha" href="#produtos">Ver produtos</a>
+        </div>
+        <div class="prova"><span>★ <b>4,8</b> no Google</span><span><b>+2.000</b> pets atendidos</span><span>Jardim Primavera</span><span class="exemplo">números de exemplo</span></div>
+      </div>
+      <div class="arte" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="400" fill="#CFE7DF"/>
+          <circle cx="200" cy="210" r="150" fill="#B5DCCF"/>
+          <!-- cachorro original, de traço simples -->
+          <ellipse cx="200" cy="330" rx="110" ry="40" fill="#E9B872"/>
+          <path d="M120 250q0-90 80-90t80 90q0 60-80 60t-80-60Z" fill="#F2C98A"/>
+          <path d="M126 198q-34-10-40 34-4 34 26 44 16-40 14-78Z" fill="#B97A3E"><animateTransform attributeName="transform" type="rotate" values="0 126 200;-6 126 200;0 126 200" dur="2.4s" repeatCount="indefinite"/></path>
+          <path d="M274 198q34-10 40 34 4 34-26 44-16-40-14-78Z" fill="#B97A3E"/>
+          <ellipse cx="200" cy="262" rx="44" ry="32" fill="#FBE6C4"/>
+          <ellipse cx="200" cy="246" rx="14" ry="10" fill="#2B1D14"/>
+          <path d="M200 256v12M186 272q14 10 28 0" stroke="#2B1D14" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="168" cy="220" r="8" fill="#2B1D14"/><circle cx="232" cy="220" r="8" fill="#2B1D14"/>
+          <circle cx="171" cy="217" r="2.5" fill="#fff"/><circle cx="235" cy="217" r="2.5" fill="#fff"/>
+          <path d="M150 306q50 22 100 0v14q-50 20-100 0Z" fill="#6D28D9"/>
+          <circle cx="200" cy="326" r="9" fill="#FBBF24"/>
+          <g fill="#fff" opacity=".85"><circle cx="96" cy="120" r="14"/><circle cx="114" cy="108" r="10"/><circle cx="300" cy="96" r="12"/><circle cx="318" cy="112" r="8"/><circle cx="330" cy="300" r="10"/></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="banho">
+    <div class="wrap">
+      <h2 class="surge">Banho e tosa</h2>
+      <p class="lead surge">Produtos hipoalergênicos, secagem sem barulho e foto do pet pronto no seu WhatsApp.</p>
+      <div class="banho">
+        <div class="plano surge"><h3>Banho</h3><p style="color:var(--suave)">Porte pequeno</p><div class="valor">R$ 55</div><ul><li>Banho e secagem</li><li>Corte de unhas</li><li>Limpeza de ouvidos</li></ul><a class="btn zap" href="#" data-zap="marcar um banho">Marcar banho</a></div>
+        <div class="plano destaque surge"><h3>Banho e tosa</h3><p style="color:var(--suave)">Porte pequeno · o mais pedido</p><div class="valor">R$ 85</div><ul><li>Tudo do banho</li><li>Tosa higiênica ou na tesoura</li><li>Perfume e lacinho</li></ul><a class="btn zap" href="#" data-zap="marcar banho e tosa">Marcar banho e tosa</a></div>
+      </div>
+      <ul class="condicoes surge"><li>Leva e traz grátis até 3 km</li><li>Médio e grande: consulte</li><li>Pacote de 4 banhos com 15% off</li></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="surge">Para quem é</h2>
+      <div class="bento surge">
+        <a href="#produtos"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="300" fill="#0F766E"/><circle cx="210" cy="120" r="90" fill="#14958A"/><path d="M150 220q0-70 60-70t60 70q0 44-60 44t-60-44Z" fill="#F2C98A"/><circle cx="190" cy="196" r="6" fill="#10231F"/><circle cx="230" cy="196" r="6" fill="#10231F"/><ellipse cx="210" cy="222" rx="10" ry="7" fill="#10231F"/></svg><span>Cães<small>Ração, petiscos, brinquedos e caminhas</small></span></a>
+        <a href="#produtos"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="300" fill="#7C3AED"/><path d="M110 210q0-60 50-60t50 60q0 40-50 40t-50-40Z" fill="#FDE68A"/><path d="M118 168l-6-36 30 22M202 168l6-36-30 22" fill="#FDE68A"/><circle cx="144" cy="196" r="5" fill="#10231F"/><circle cx="176" cy="196" r="5" fill="#10231F"/></svg><span>Gatos<small>Areia, sachês e arranhadores</small></span></a>
+        <a href="#banho"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="300" fill="#0EA5E9"/><g fill="#fff" opacity=".85"><circle cx="90" cy="120" r="30"/><circle cx="140" cy="90" r="20"/><circle cx="200" cy="140" r="36"/><circle cx="230" cy="80" r="14"/></g></svg><span>Banho e tosa<small>Com hora marcada</small></span></a>
+        <a href="#onde"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="300" fill="#F59E0B"/><path d="M150 70v160M70 150h160" stroke="#fff" stroke-width="40" stroke-linecap="round"/></svg><span>Veterinário<small>Às terças, das 9h às 13h</small></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="produtos">
+    <div class="wrap">
+      <h2 class="surge">Mais pedidos da semana</h2>
+      <p class="lead surge">Entrega no mesmo dia para pedidos até as 16h.</p>
+      <ul class="produtos">
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><path d="M60 50h80l10 110H50Z" fill="#0F766E"/><rect x="66" y="80" width="68" height="40" rx="6" fill="#fff"/><g fill="#B97A3E"><circle cx="86" cy="100" r="6"/><circle cx="100" cy="94" r="6"/><circle cx="114" cy="102" r="6"/></g><path d="M60 50h80" stroke="#0B5F58" stroke-width="10"/></svg></div><div class="info"><h3>Ração premium 10,1 kg</h3><p>Cães adultos, porte pequeno.</p><div class="preco">R$ 189,90 <button class="pedir" data-zap="a ração premium">Pedir</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><g transform="rotate(-20 100 100)"><rect x="40" y="88" width="120" height="24" rx="12" fill="#E9B872"/><circle cx="44" cy="84" r="16" fill="#E9B872"/><circle cx="44" cy="116" r="16" fill="#E9B872"/><circle cx="156" cy="84" r="16" fill="#E9B872"/><circle cx="156" cy="116" r="16" fill="#E9B872"/></g></svg></div><div class="info"><h3>Ossinho de couro</h3><p>Pacote com 10. Ajuda a limpar os dentes.</p><div class="preco">R$ 24,90 <button class="pedir" data-zap="o ossinho de couro">Pedir</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><circle cx="100" cy="104" r="46" fill="#A3E635"/><path d="M58 86q42 20 84 0M58 122q42-20 84 0" stroke="#fff" stroke-width="6" fill="none"/></svg></div><div class="info"><h3>Bolinha que pula</h3><p>Borracha atóxica, aguenta mordida.</p><div class="preco">R$ 19,90 <button class="pedir" data-zap="a bolinha">Pedir</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><ellipse cx="100" cy="120" rx="76" ry="40" fill="#6D28D9"/><ellipse cx="100" cy="114" rx="56" ry="26" fill="#DDD6FE"/></svg></div><div class="info"><h3>Caminha redonda</h3><p>Lavável, tamanho M.</p><div class="preco">R$ 129,00 <button class="pedir" data-zap="a caminha redonda">Pedir</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><ellipse cx="100" cy="100" rx="58" ry="40" fill="none" stroke="#F43F5E" stroke-width="16"/><circle cx="100" cy="146" r="12" fill="#FBBF24"/><rect x="128" y="64" width="22" height="14" rx="3" fill="#9CA3AF"/></svg></div><div class="info"><h3>Coleira com plaquinha</h3><p>Gravamos o nome e o seu telefone.</p><div class="preco">R$ 39,90 <button class="pedir" data-zap="a coleira com plaquinha">Pedir</button></div></div></li>
+        <li class="produto surge"><div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#E2EFEA"/><path d="M50 80h100v60a20 20 0 0 1-20 20H70a20 20 0 0 1-20-20Z" fill="#FDE68A"/><path d="M50 80h100" stroke="#F59E0B" stroke-width="8"/><g fill="#fff"><circle cx="80" cy="116" r="8"/><circle cx="110" cy="128" r="6"/><circle cx="124" cy="108" r="5"/></g></svg></div><div class="info"><h3>Areia para gatos 4 kg</h3><p>Biodegradável, segura o cheiro.</p><div class="preco">R$ 34,90 <button class="pedir" data-zap="a areia para gatos">Pedir</button></div></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="avaliacoes surge">
+        <div><div class="nota">4,8</div><div class="estrelas" aria-label="5 estrelas">★★★★★</div></div>
+        <p><b>Aqui entram as avaliações reais do Google do seu pet shop.</b> No site de verdade, mostramos o que os tutores já escreveram, com nome e data. Nada inventado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="onde">
+    <div class="wrap onde">
+      <div class="mapa surge" aria-hidden="true">
+        <svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#DCEBE5"/><g stroke="#fff" stroke-width="16"><path d="M0 70h400M0 230h400M90 0v300M300 0v300"/></g><path d="M0 300 400 120" stroke="#fff" stroke-width="10"/><circle cx="330" cy="180" r="40" fill="#BFDDD2"/><path d="M200 116c-14 0-24 10-24 23 0 18 24 39 24 39s24-21 24-39c0-13-10-23-24-23Z" fill="#6D28D9"/><circle cx="200" cy="139" r="8" fill="#fff"/></svg>
+      </div>
+      <div class="surge">
+        <h2>Onde estamos</h2>
+        <p class="aberto" data-aberto><i></i><span>Horário</span></p>
+        <dl style="margin-top:22px">
+          <div><dt>Endereço</dt><dd>Avenida dos Ipês, 845 · Jardim Primavera (endereço de exemplo)</dd></div>
+          <div><dt>Horário</dt><dd>Segunda a sexta, 8h às 19h · Sábado, 8h às 17h</dd></div>
+          <div><dt>Telefone</dt><dd><a href="#" data-zap="">(00) 0000-0000</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap"><span>Bigode Pet · loja fictícia, criada para mostrar o trabalho</span><span>Site por <a href="../../#lojas">Harle</a></span></div>
+</footer>
+
+<button class="zap-fixo" type="button" data-zap="" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg></button>
+
+<script src="../base.js" defer></script>
+<script>
+// Efeito-assinatura: patinhas seguem o dedo (ou o mouse) no topo
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  var area = document.getElementById('topo'), camada = document.getElementById('patas'), ultimo = 0, lado = 1
+  var PATA = '<svg viewBox="0 0 64 64" fill="currentColor"><ellipse cx="32" cy="42" rx="14" ry="12"/><circle cx="16" cy="26" r="6"/><circle cx="26" cy="16" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="48" cy="26" r="6"/></svg>'
+  area.addEventListener('pointermove', function (e) {
+    var agora = performance.now()
+    if (agora - ultimo < 140) return
+    ultimo = agora
+    var r = area.getBoundingClientRect(), d = document.createElement('div')
+    d.innerHTML = PATA
+    var s = d.firstChild
+    lado = -lado
+    var ang = Math.atan2(e.movementY || 0, e.movementX || 1) * 180 / Math.PI + 90
+    s.style.left = (e.clientX - r.left - 13 + lado * 9) + 'px'
+    s.style.top = (e.clientY - r.top - 13) + 'px'
+    s.style.transform = 'rotate(' + ang + 'deg)'
+    camada.appendChild(s)
+    requestAnimationFrame(function () { s.style.opacity = '0'; s.style.transform = 'rotate(' + ang + 'deg) scale(.7)' })
+    setTimeout(function () { s.remove() }, 950)
+  }, { passive: true })
+})()
+</script>
+</body>
+</html>

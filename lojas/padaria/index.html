@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa do Fermento · Padaria de bairro (site de exemplo)</title>
+<meta name="description" content="Exemplo de site para padaria feito por Harle: pão quentinho, encomendas pelo WhatsApp, horário e endereço com um toque.">
+<meta property="og:title" content="Casa do Fermento · site de exemplo para padaria">
+<meta property="og:description" content="Exemplo de site para padaria feito por Harle.">
+<meta name="theme-color" content="#FBF6EE">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='36' rx='26' ry='18' fill='%23C98A3E'/%3E%3Cpath d='M18 30q6-6 10 2M30 26q6-6 10 2M42 30q4-4 6 2' stroke='%23FBF6EE' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+:root{
+  --fundo:#FBF6EE; --fundo-foto:#F3E6D2; --cartao:#FFFDF9; --linha:#E8D9C3;
+  --texto:#2B1D14; --suave:#6B5444; --marca:#B5651D;
+  --acao:#B4410C; --acao-forte:#963508; --sobre-acao:#fff;
+  --titulo:"Fraunces",Georgia,serif; --corpo:"DM Sans",system-ui,sans-serif;
+}
+.hero h1 em{font-style:normal;color:var(--marca)}
+#farinha{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.fornada{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;font-weight:600;color:var(--marca)}
+.fornada svg{width:22px;height:22px}
+.encomenda{background:var(--texto);color:var(--fundo);border-radius:32px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.encomenda h2{color:var(--fundo)}
+.encomenda p{color:#E8D9C3;max-width:46ch}
+@media (max-width:760px){.encomenda{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-horario="1-5 06:30-20:00; 6 06:30-14:00; 0 07:00-12:00">
+
+<div class="demo">Loja fictícia · exemplo de site feito por Harle. <a href="../../#lojas">Quero um assim para a minha loja →</a></div>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="36" rx="26" ry="18" fill="#C98A3E"/><path d="M18 30q6-6 10 2M30 26q6-6 10 2M42 30q4-4 6 2" stroke="#FBF6EE" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      Casa do Fermento
+    </a>
+    <nav><a href="#produtos">Cardápio</a><a href="#encomendas">Encomendas</a><a href="#onde">Onde estamos</a></nav>
+    <a class="btn zap pequeno" href="#" data-zap="">Pedir no WhatsApp</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <canvas id="farinha" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div>
+        <div class="fornada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Fornadas às 6h30, 11h e 16h</div>
+        <h1>Pão quentinho, <em>do jeito de casa.</em></h1>
+        <p class="frase">Padaria de bairro com fermentação natural, bolos de vó e café passado na hora. Peça pelo WhatsApp e retire sem fila.</p>
+        <div class="acoes">
+          <a class="btn zap" href="#" data-zap="fazer um pedido"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg>Pedir no WhatsApp</a>
+          <a class="btn linha" href="#produtos">Ver o cardápio</a>
+        </div>
+        <div class="prova"><span>★ <b>4,9</b> no Google</span><span><b>12 anos</b> no bairro</span><span>Vila Aurora</span><span class="exemplo">números de exemplo</span></div>
+      </div>
+      <div class="arte" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="luz" cx=".5" cy=".35" r=".7"><stop offset="0" stop-color="#FFE7C2"/><stop offset="1" stop-color="#F0D7B4"/></radialGradient>
+            <linearGradient id="casca" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D99A4E"/><stop offset=".6" stop-color="#B86E2A"/><stop offset="1" stop-color="#8A4B18"/></linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="url(#luz)"/>
+          <ellipse cx="200" cy="318" rx="160" ry="22" fill="#C9A47A" opacity=".45"/>
+          <path d="M58 300c-6-70 50-128 142-128s148 58 142 128c-2 18-24 26-142 26S60 318 58 300Z" fill="url(#casca)"/>
+          <g stroke="#F7E3C4" stroke-width="9" stroke-linecap="round" fill="none" opacity=".9">
+            <path d="M112 236q22-34 54-30"/><path d="M178 214q24-34 56-30"/><path d="M246 228q20-28 48-22"/>
+          </g>
+          <g fill="#FFF8EE" opacity=".8"><circle cx="140" cy="200" r="3"/><circle cx="220" cy="190" r="2.5"/><circle cx="280" cy="210" r="3"/><circle cx="96" cy="262" r="2"/><circle cx="300" cy="258" r="2.5"/></g>
+          <g stroke="#FFF" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55">
+            <path d="M160 150q-10-20 4-38t0-38"><animate attributeName="opacity" values=".1;.6;.1" dur="3.6s" repeatCount="indefinite"/></path>
+            <path d="M206 140q-10-20 4-38t0-38"><animate attributeName="opacity" values=".5;.1;.5" dur="3.2s" repeatCount="indefinite"/></path>
+            <path d="M250 152q-10-20 4-38t0-38"><animate attributeName="opacity" values=".2;.55;.2" dur="4s" repeatCount="indefinite"/></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="produtos">
+    <div class="wrap">
+      <h2 class="surge">Saindo do forno</h2>
+      <p class="lead surge">Os preferidos do bairro. Tudo feito aqui, todo dia.</p>
+      <ul class="produtos">
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><ellipse cx="100" cy="140" rx="74" ry="10" fill="#D9BF9B"/><path d="M32 128c0-30 30-52 68-52s68 22 68 52c0 10-30 12-68 12s-68-2-68-12Z" fill="#C98A3E"/><path d="M62 104q20-14 40-6M98 96q20-14 40-6" stroke="#F3D9AE" stroke-width="7" stroke-linecap="round" fill="none"/></svg></div>
+          <div class="info"><h3>Pão francês</h3><p>Casquinha que estala. Fornadas o dia todo.</p><div class="preco">R$ 18,90/kg <button class="pedir" data-zap="pão francês">Pedir</button></div></div>
+        </li>
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><ellipse cx="100" cy="146" rx="70" ry="9" fill="#D9BF9B"/><path d="M28 132q18-62 72-62t72 62q-30 10-72 10t-72-10Z" fill="#D9963F"/><path d="M60 136q8-46 40-52M140 136q-8-46-40-52M100 84v54" stroke="#A9601F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M40 128q-14-4-16 6M160 128q14-4 16 6" stroke="#C17E31" stroke-width="10" stroke-linecap="round" fill="none"/></svg></div>
+          <div class="info"><h3>Croissant de manteiga</h3><p>Folhado, 27 camadas, manteiga de verdade.</p><div class="preco">R$ 9,50 <button class="pedir" data-zap="croissant">Pedir</button></div></div>
+        </li>
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><ellipse cx="100" cy="150" rx="76" ry="10" fill="#D9BF9B"/><path d="M30 96h140v44q-70 14-140 0Z" fill="#E8913A"/><path d="M30 96q70-16 140 0v12q-12 8-22 0-12 10-24 0-12 10-24 0-12 10-24 0-12 10-24 0-10 8-22 0Z" fill="#4A2A18"/><g fill="#F7E8D2"><circle cx="60" cy="122" r="2"/><circle cx="104" cy="128" r="2"/><circle cx="142" cy="120" r="2"/></g></svg></div>
+          <div class="info"><h3>Bolo de cenoura</h3><p>Com cobertura de chocolate que escorre.</p><div class="preco">R$ 42,00 <button class="pedir" data-zap="um bolo de cenoura">Pedir</button></div></div>
+        </li>
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><g><ellipse cx="72" cy="122" rx="34" ry="28" fill="#F1C66A"/><ellipse cx="128" cy="110" rx="34" ry="28" fill="#EDBB55"/><ellipse cx="104" cy="146" rx="34" ry="26" fill="#F3CB72"/></g><g fill="#D99A3A" opacity=".6"><circle cx="64" cy="114" r="3"/><circle cx="120" cy="100" r="3"/><circle cx="110" cy="140" r="3"/><circle cx="140" cy="118" r="2"/></g></svg></div>
+          <div class="info"><h3>Pão de queijo</h3><p>Com queijo canastra. Sai a cada 30 minutos.</p><div class="preco">R$ 4,50 <button class="pedir" data-zap="pão de queijo">Pedir</button></div></div>
+        </li>
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><ellipse cx="100" cy="148" rx="64" ry="9" fill="#D9BF9B"/><ellipse cx="100" cy="112" rx="62" ry="36" fill="#E4A65A"/><path d="M50 106q50 22 100 0" stroke="#FFF6E2" stroke-width="16" stroke-linecap="round" fill="none"/><g fill="#fff" opacity=".9"><circle cx="70" cy="88" r="2"/><circle cx="96" cy="82" r="2"/><circle cx="126" cy="86" r="2"/><circle cx="84" cy="94" r="1.5"/><circle cx="112" cy="92" r="1.5"/></g></svg></div>
+          <div class="info"><h3>Sonho</h3><p>Recheio de creme de baunilha, bem servido.</p><div class="preco">R$ 7,90 <button class="pedir" data-zap="sonho">Pedir</button></div></div>
+        </li>
+        <li class="produto surge">
+          <div class="foto"><svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#F3E6D2"/><ellipse cx="100" cy="156" rx="64" ry="9" fill="#D9BF9B"/><path d="M58 82h84l-8 70q-34 8-68 0Z" fill="#FFFDF9"/><path d="M142 96q26 2 22 24-4 18-26 16" stroke="#FFFDF9" stroke-width="10" fill="none"/><ellipse cx="100" cy="84" rx="42" ry="8" fill="#6B3B1E"/><path d="M84 64q-8-12 2-22M106 62q-8-12 2-22" stroke="#C9A47A" stroke-width="4" stroke-linecap="round" fill="none"/></svg></div>
+          <div class="info"><h3>Café coado</h3><p>Grão de Minas, moído na hora.</p><div class="preco">R$ 6,00 <button class="pedir" data-zap="um café">Pedir</button></div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="surge">Por que o bairro volta</h2>
+      <div class="motivos">
+        <div class="motivo surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3c3 4 6 6 6 10a6 6 0 0 1-12 0c0-4 3-6 6-10Z"/></svg><h3>Fermentação natural</h3><p>Massa que descansa 24 horas. Mais sabor e mais leve.</p></div>
+        <div class="motivo surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Três fornadas por dia</h3><p>De manhã, no almoço e no fim da tarde: sempre quente.</p></div>
+        <div class="motivo surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><h3>Pede e retira sem fila</h3><p>Manda o pedido no WhatsApp e passa só para pegar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="encomendas">
+    <div class="wrap encomenda surge">
+      <div>
+        <h2>Bolo para o aniversário? A gente faz.</h2>
+        <p>Bolos, salgados e cestas de café da manhã sob encomenda, com 48 horas de antecedência. Conta o que precisa e mandamos o orçamento.</p>
+      </div>
+      <a class="btn zap" href="#" data-zap="fazer uma encomenda">Fazer encomenda</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="surge">Como pedir</h2>
+      <ol class="passos">
+        <li class="surge"><h3>Escolha</h3><p>Veja o cardápio e toque em "Pedir" no que quiser.</p></li>
+        <li class="surge"><h3>Mande no WhatsApp</h3><p>A mensagem já vai pronta. A gente confirma em minutos.</p></li>
+        <li class="surge"><h3>Retire ou receba</h3><p>Retirada sem fila ou entrega no bairro.</p></li>
+      </ol>
+      <ul class="condicoes surge"><li>Entrega grátis até 2 km</li><li>Pix, cartão e dinheiro</li><li>Encomendas com 48 h</li></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="avaliacoes surge">
+        <div><div class="nota">4,9</div><div class="estrelas" aria-label="5 estrelas">★★★★★</div></div>
+        <p><b>Aqui entram as avaliações reais do Google da sua padaria.</b> No site de verdade, mostramos o que os seus clientes já escreveram, com nome e data, puxado do seu perfil. Nada inventado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="onde">
+    <div class="wrap onde">
+      <div class="mapa surge" aria-hidden="true">
+        <svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#EFE4D3"/><g stroke="#FFFDF9" stroke-width="16"><path d="M0 90h400M0 210h400M120 0v300M290 0v300"/></g><g stroke="#FFFDF9" stroke-width="7"><path d="M0 150h400M210 0v300"/></g><rect x="134" y="104" width="62" height="38" rx="4" fill="#DCCDB5"/><rect x="224" y="160" width="52" height="36" rx="4" fill="#DCCDB5"/><path d="M210 132c-14 0-24 10-24 23 0 18 24 39 24 39s24-21 24-39c0-13-10-23-24-23Z" fill="#B4410C"/><circle cx="210" cy="155" r="8" fill="#fff"/></svg>
+      </div>
+      <div class="surge">
+        <h2>Onde estamos</h2>
+        <p class="aberto" data-aberto><i></i><span>Horário</span></p>
+        <dl style="margin-top:22px">
+          <div><dt>Endereço</dt><dd>Rua das Acácias, 120 · Vila Aurora (endereço de exemplo)</dd></div>
+          <div><dt>Horário</dt><dd>Segunda a sexta, 6h30 às 20h · Sábado, 6h30 às 14h · Domingo, 7h às 12h</dd></div>
+          <div><dt>Telefone</dt><dd><a href="#" data-zap="">(00) 0000-0000</a></dd></div>
+        </dl>
+        <div class="acoes" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px"><a class="btn linha" href="#" data-zap="">Como chegar</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap"><span>Casa do Fermento · loja fictícia, criada para mostrar o trabalho</span><span>Site por <a href="../../#lojas">Harle</a></span></div>
+</footer>
+
+<button class="zap-fixo" type="button" data-zap="" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Zm3 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" fill-rule="evenodd"/></svg></button>
+
+<script src="../base.js" defer></script>
+<script>
+// Efeito-assinatura: farinha caindo devagar sobre o topo (para com "reduzir movimento" e fora da tela)
+window.addEventListener('load', function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  var c = document.getElementById('farinha'), x = c.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1), w, h, ps = [], vis = true
+  function medir() { w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0) }
+  medir(); addEventListener('resize', medir)
+  for (var i = 0; i < Math.min(70, Math.round(w / 14)); i++) ps.push({ x: Math.random() * w, y: Math.random() * h, r: .6 + Math.random() * 1.8, v: .15 + Math.random() * .35, o: Math.random() * 6.28 })
+  new IntersectionObserver(function (e) { vis = e[0].isIntersecting; if (vis) requestAnimationFrame(passo) }).observe(c)
+  function passo(t) {
+    if (!vis) return
+    x.clearRect(0, 0, w, h)
+    for (var i = 0; i < ps.length; i++) {
+      var p = ps[i]
+      p.y += p.v; p.x += Math.sin(t / 1400 + p.o) * .25
+      if (p.y > h + 4) { p.y = -4; p.x = Math.random() * w }
+      x.globalAlpha = .55; x.fillStyle = '#FFFFFF'; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.28); x.fill()
+    }
+    requestAnimationFrame(passo)
+  }
+})
+</script>
+</body>
+</html>

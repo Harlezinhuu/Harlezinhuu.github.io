@@ -12,7 +12,7 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#16181d">
-<meta name="description" content="Projetos do Harle: otimizador de FPS, player de música, assistente pessoal, bot de Discord e um jogo para jogar no navegador.">
+<meta name="description" content="Harle: sites para lojas, rápidos no celular e com pedido pelo WhatsApp. E projetos: otimizador de FPS, player de música, assistente pessoal, bot de Discord e um jogo para jogar no navegador.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23eef1f5'/%3E%3Cstop offset='.55' stop-color='%238a919c'/%3E%3Cstop offset='1' stop-color='%23d3d8df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 3 57 17.5v29L32 61 7 46.5v-29z' fill='%2316181d' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M23 19v26M41 19v26M23 32h18' stroke='%234c8dff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,7 +116,7 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 .links a.play:hover{color:#10261a;background:#78ec95}
 .project.bot .art{aspect-ratio:1000/460}
 .project.bot .art.shot img{object-fit:contain}
-.links a[hidden]{display:none}
+.links a[hidden],.btn[hidden]{display:none}
 .kind{font:500 .85rem var(--display);color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
 .project h3{font:700 clamp(1.6rem,3.6vw,2.2rem)/1.1 var(--display);margin-bottom:12px}
 .project p{color:var(--muted);max-width:46ch}
@@ -147,6 +147,37 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
   .next{grid-template-columns:1fr}
   .next div,.next div + div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}
 }
+
+/* sites para lojas */
+.lojas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.demo-loja{display:flex;flex-direction:column;justify-content:space-between;min-height:220px;padding:22px;border-radius:var(--radius-lg);text-decoration:none;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.demo-loja:hover{transform:translateY(-3px);border-color:var(--silver-3)}
+.demo-loja .tipo{font:600 .78rem var(--display);letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.demo-loja b{font-size:1.9rem;line-height:1.05;display:block;margin:6px 0 4px}
+.demo-loja small{font-size:.92rem;opacity:.85}
+.demo-loja .ver{font:600 .9rem var(--display);margin-top:18px}
+.demo-loja.padaria{background:#FBF6EE;color:#2B1D14}.demo-loja.padaria b{font-family:Georgia,serif;color:#B5651D}
+.demo-loja.pet{background:#0F766E;color:#F3F7F5}.demo-loja.pet b{font-family:var(--display)}
+.demo-loja.moda{background:#161616;color:#F2EEE8}.demo-loja.moda b{font-family:Georgia,serif;font-style:italic;color:#E7C9A9}
+.pacotes{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-bottom:40px}
+.pacotes div{padding:22px 18px 18px 0}
+.pacotes div + div{padding-left:18px;border-left:1px solid var(--line)}
+.pacotes h3{font:600 1.15rem var(--display);margin-bottom:4px}
+.pacotes .de{font:700 1.5rem var(--display);background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0}
+.pacotes p{color:var(--muted);font-size:.92rem}
+.etapas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0;list-style:none;counter-reset:e;margin-bottom:36px}
+.etapas li{counter-increment:e;padding:18px;border-radius:var(--radius-sm);background:var(--bg-raised);border:1px solid var(--line)}
+.etapas li::before{content:counter(e);font:700 1.6rem var(--display);color:var(--blue);display:block}
+.etapas h3{font:600 1.02rem var(--display);margin:4px 0}
+.etapas p{color:var(--muted);font-size:.9rem}
+.nota-pequena{color:var(--muted);font-size:.88rem;margin-top:14px}
+@media (max-width:860px){
+  .lojas-grid{grid-template-columns:1fr}
+  .pacotes,.etapas{grid-template-columns:1fr 1fr}
+  .pacotes div:nth-child(3){padding-left:0;border-left:0}
+  .pacotes div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:480px){.pacotes,.etapas{grid-template-columns:1fr}.pacotes div,.pacotes div + div{padding:18px 0;border-left:0}}
 
 /* sobre / contato */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:start}
@@ -180,6 +211,7 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
     Harle
   </a>
   <nav>
+    <a class="navlink" href="#lojas"><span class="pt">Sites para lojas</span><span class="en">Shop websites</span></a>
     <a class="navlink" href="#projetos"><span class="pt">Projetos</span><span class="en">Projects</span></a>
     <a class="navlink" href="#sobre"><span class="pt">Sobre</span><span class="en">About</span></a>
     <div class="lang" role="group" aria-label="Idioma / Language">
@@ -204,6 +236,7 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
     </p>
     <div class="actions">
       <a class="btn primary" href="#projetos"><span class="pt">Ver projetos</span><span class="en">See projects</span></a>
+      <a data-goatcounter-click="hero-lojas" class="btn" href="#lojas"><span class="pt">Site para a sua loja</span><span class="en">A website for your shop</span></a>
       <a data-goatcounter-click="perfil-github" class="btn" href="https://github.com/Harlezinhuu" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
         GitHub
@@ -217,6 +250,50 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
         <span class="pt">Comunidade</span><span class="en">Community</span>
       </a>
     </div>
+  </section>
+
+  <section id="lojas" class="wrap" aria-labelledby="l">
+    <h2 id="l"><span class="pt">Sites para lojas</span><span class="en">Websites for local shops</span></h2>
+    <p class="lead">
+      <span class="pt">Faço o site da sua loja: rápido no celular, bonito de verdade e com o pedido indo direto para o seu WhatsApp. Antes de fechar, você vê uma prévia com a cara da sua loja.</span>
+      <span class="en">I build your shop's website: fast on phones, genuinely good-looking, with orders going straight to your WhatsApp. Before you commit, you see a preview made for your shop.</span>
+    </p>
+
+    <div class="lojas-grid">
+      <a class="demo-loja padaria" href="lojas/padaria/" data-goatcounter-click="demo-padaria">
+        <div><span class="tipo"><span class="pt">Padaria</span><span class="en">Bakery</span></span><b>Casa do Fermento</b><small><span class="pt">Cardápio, encomendas e farinha caindo no topo</span><span class="en">Menu, custom orders and flour falling across the top</span></small></div>
+        <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
+      </a>
+      <a class="demo-loja pet" href="lojas/petshop/" data-goatcounter-click="demo-pet">
+        <div><span class="tipo">Pet shop</span><b>Bigode Pet</b><small><span class="pt">Banho e tosa com horário e patinhas que seguem o dedo</span><span class="en">Grooming bookings and paw prints that follow your finger</span></small></div>
+        <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
+      </a>
+      <a class="demo-loja moda" href="lojas/moda/" data-goatcounter-click="demo-moda">
+        <div><span class="tipo"><span class="pt">Moda</span><span class="en">Fashion</span></span><b>Ateliê Maré</b><small><span class="pt">Coleção, provador pelo WhatsApp e tabela de medidas</span><span class="en">Collection, WhatsApp fitting help and a size chart</span></small></div>
+        <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
+      </a>
+    </div>
+
+    <div class="pacotes">
+      <div><h3>Vitrine</h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 600</div><p><span class="pt">Uma página: produtos, horário, mapa e WhatsApp.</span><span class="en">One page: products, hours, map and WhatsApp.</span></p></div>
+      <div><h3><span class="pt">Site da loja</span><span class="en">Shop website</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 1.500</div><p><span class="pt">Até 5 páginas, catálogo, pedido pelo WhatsApp e um efeito com a cara da loja.</span><span class="en">Up to 5 pages, a catalog, WhatsApp ordering and a signature effect.</span></p></div>
+      <div><h3><span class="pt">Loja virtual</span><span class="en">Online store</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 3.000</div><p><span class="pt">Carrinho, Pix e cartão, frete calculado e compra sem cadastro.</span><span class="en">Cart, Pix and cards, shipping rates and guest checkout.</span></p></div>
+      <div><h3><span class="pt">Manutenção</span><span class="en">Care plan</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 100<small style="font-size:.9rem">/<span class="pt">mês</span><span class="en">mo</span></small></div><p><span class="pt">Troca de produtos e preços, backup, site vigiado e relatório do mês.</span><span class="en">Product and price updates, backups, uptime watch and a monthly report.</span></p></div>
+    </div>
+
+    <ol class="etapas">
+      <li><h3><span class="pt">Estudo a sua loja</span><span class="en">I study your shop</span></h3><p><span class="pt">O que os clientes elogiam, o que procuram e o que os concorrentes fazem.</span><span class="en">What customers praise, what they look for and what competitors do.</span></p></li>
+      <li><h3><span class="pt">Você vê a prévia</span><span class="en">You see a preview</span></h3><p><span class="pt">Com as suas cores e o seu jeito, antes de fechar qualquer coisa.</span><span class="en">In your colors and style, before you commit to anything.</span></p></li>
+      <li><h3><span class="pt">Metade para começar</span><span class="en">Half to start</span></h3><p><span class="pt">50% de entrada e 50% na entrega, com contrato e duas rodadas de ajustes.</span><span class="en">50% upfront and 50% on delivery, with a contract and two rounds of changes.</span></p></li>
+      <li><h3><span class="pt">No ar</span><span class="en">Live</span></h3><p><span class="pt">Em cerca de uma semana depois do material, rápido no celular e pronto para o Google.</span><span class="en">About a week after I get your material, fast on phones and ready for Google.</span></p></li>
+    </ol>
+
+    <div class="actions">
+      <a class="btn primary" data-goatcounter-click="lojas-orcamento" href="mailto:am8958867@gmail.com?subject=Or%C3%A7amento%20de%20site%20para%20a%20minha%20loja"><span class="pt">Pedir orçamento</span><span class="en">Get a quote</span></a>
+      <!-- O botão do WhatsApp aparece quando o número está em data-whatsapp (só dígitos, com 55 e DDD). -->
+      <a id="zap-lojas" class="btn" data-whatsapp="" data-goatcounter-click="lojas-whatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp</a>
+    </div>
+    <p class="nota-pequena"><span class="pt">As lojas dos exemplos são fictícias. No site da sua loja entram as suas fotos e as avaliações reais do Google.</span><span class="en">The example shops are fictional. Your site uses your own photos and your real Google reviews.</span></p>
   </section>
 
   <section id="projetos" class="wrap" aria-labelledby="p">
@@ -446,6 +523,15 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
   try{saved=localStorage.getItem('harle-lang')}catch(e){}
   set(saved || ((navigator.language||'pt').toLowerCase().indexOf('pt')===0 ? 'pt' : 'en'));
   btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+})();
+(function(){
+  // botão do WhatsApp dos sites para lojas: só aparece quando o número está preenchido
+  var z=document.getElementById('zap-lojas');
+  if(!z) return;
+  var n=(z.dataset.whatsapp||'').replace(/\D/g,'');
+  if(n.length<12) return;
+  z.href='https://wa.me/'+n+'?text='+encodeURIComponent('Oi, Harle! Vi seu site e quero um orçamento para a minha loja.');
+  z.hidden=false;
 })();
 (function(){
   // botão "Adicionar ao servidor" do Harle Bot: só aparece quando o Application ID está preenchido
