@@ -70,10 +70,12 @@ section{padding:clamp(56px,9vw,104px) 0}
 .bento a:first-child{grid-row:span 2}
 .bento a svg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;transition:transform .4s}
 .bento a:hover svg{transform:scale(1.04)}
-.bento a::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.55));z-index:-1}
+.bento a::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 25%,rgba(0,0,0,.72));z-index:-1}
+.bento span,.bento small{text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .bento span{font:700 1.4rem var(--titulo)}
 .bento small{display:block;font:500 .9rem var(--corpo);opacity:.9}
 @media (max-width:760px){.bento{grid-template-columns:1fr 1fr;grid-template-rows:180px 150px 150px}.bento a:first-child{grid-column:span 2;grid-row:auto}}
+@media (max-width:760px){.bento a{padding:12px}.bento span{background:rgba(0,0,0,.34);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:8px 12px;border-radius:14px;font-size:1.2rem;line-height:1.15}}
 
 /* motivos */
 .motivos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
