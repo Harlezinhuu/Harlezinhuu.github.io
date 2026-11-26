@@ -149,7 +149,7 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 }
 
 /* sites para lojas */
-.lojas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.lojas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px}
 .demo-loja{display:flex;flex-direction:column;justify-content:space-between;min-height:220px;padding:22px;border-radius:var(--radius-lg);text-decoration:none;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
 .demo-loja:hover{transform:translateY(-3px);border-color:var(--silver-3)}
 .demo-loja .tipo{font:600 .78rem var(--display);letter-spacing:.08em;text-transform:uppercase;opacity:.75}
@@ -158,13 +158,16 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 .demo-loja .ver{font:600 .9rem var(--display);margin-top:18px}
 .demo-loja.padaria{background:#FBF6EE;color:#2B1D14}.demo-loja.padaria b{font-family:Georgia,serif;color:#B5651D}
 .demo-loja.pet{background:#0F766E;color:#F3F7F5}.demo-loja.pet b{font-family:var(--display)}
+.demo-loja.cardapio{background:#17120F;color:#F6EEE6;border-color:#3A2F27}.demo-loja.cardapio b{font-family:var(--display);color:#F2A03D}
 .demo-loja.moda{background:#161616;color:#F2EEE8}.demo-loja.moda b{font-family:Georgia,serif;font-style:italic;color:#E7C9A9}
-.pacotes{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-bottom:40px}
+.pacotes{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-bottom:40px}
 .pacotes div{padding:22px 18px 18px 0}
 .pacotes div + div{padding-left:18px;border-left:1px solid var(--line)}
 .pacotes h3{font:600 1.15rem var(--display);margin-bottom:4px}
 .pacotes .de{font:700 1.5rem var(--display);background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0}
 .pacotes p{color:var(--muted);font-size:.92rem}
+html[data-lang="pt"] .pacotes .de > .pt,html[data-lang="en"] .pacotes .de > .en{display:block;font:500 .8rem var(--display);color:var(--muted);-webkit-text-fill-color:var(--muted);margin-bottom:2px}
+.pacotes .de{white-space:nowrap}
 .etapas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0;list-style:none;counter-reset:e;margin-bottom:36px}
 .etapas li{counter-increment:e;padding:18px;border-radius:var(--radius-sm);background:var(--bg-raised);border:1px solid var(--line)}
 .etapas li::before{content:counter(e);font:700 1.6rem var(--display);color:var(--blue);display:block}
@@ -174,7 +177,7 @@ h2{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--display);margin-bottom:10px}
 @media (max-width:860px){
   .lojas-grid{grid-template-columns:1fr}
   .pacotes,.etapas{grid-template-columns:1fr 1fr}
-  .pacotes div:nth-child(3){padding-left:0;border-left:0}
+  .pacotes div:nth-child(odd){padding-left:0;border-left:0}
   .pacotes div:nth-child(n+3){border-top:1px solid var(--line)}
 }
 @media (max-width:480px){.pacotes,.etapas{grid-template-columns:1fr}.pacotes div,.pacotes div + div{padding:18px 0;border-left:0}}
@@ -268,6 +271,10 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
         <div><span class="tipo">Pet shop</span><b>Bigode Pet</b><small><span class="pt">Banho e tosa com horário e patinhas que seguem o dedo</span><span class="en">Grooming bookings and paw prints that follow your finger</span></small></div>
         <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
       </a>
+      <a class="demo-loja cardapio" href="lojas/cardapio/" data-goatcounter-click="demo-cardapio">
+        <div><span class="tipo"><span class="pt">Cardápio digital</span><span class="en">Digital menu</span></span><b>Brasa &amp; Pão</b><small><span class="pt">Abre pelo QR code da mesa, com busca e pedido pelo WhatsApp</span><span class="en">Opens from the table QR code, with search and WhatsApp ordering</span></small></div>
+        <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
+      </a>
       <a class="demo-loja moda" href="lojas/moda/" data-goatcounter-click="demo-moda">
         <div><span class="tipo"><span class="pt">Moda</span><span class="en">Fashion</span></span><b>Ateliê Maré</b><small><span class="pt">Coleção, provador pelo WhatsApp e tabela de medidas</span><span class="en">Collection, WhatsApp fitting help and a size chart</span></small></div>
         <span class="ver"><span class="pt">Ver exemplo →</span><span class="en">See example →</span></span>
@@ -275,6 +282,7 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
     </div>
 
     <div class="pacotes">
+      <div><h3><span class="pt">Cardápio digital</span><span class="en">Digital menu</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 200</div><p><span class="pt">Cardápio no celular pelo QR code da mesa, com busca, categorias e pedido pelo WhatsApp.</span><span class="en">A phone menu from the table QR code, with search, categories and WhatsApp ordering.</span></p></div>
       <div><h3>Vitrine</h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 600</div><p><span class="pt">Uma página: produtos, horário, mapa e WhatsApp.</span><span class="en">One page: products, hours, map and WhatsApp.</span></p></div>
       <div><h3><span class="pt">Site da loja</span><span class="en">Shop website</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 1.500</div><p><span class="pt">Até 5 páginas, catálogo, pedido pelo WhatsApp e um efeito com a cara da loja.</span><span class="en">Up to 5 pages, a catalog, WhatsApp ordering and a signature effect.</span></p></div>
       <div><h3><span class="pt">Loja virtual</span><span class="en">Online store</span></h3><div class="de"><span class="pt">a partir de</span><span class="en">from</span> R$ 3.000</div><p><span class="pt">Carrinho, Pix e cartão, frete calculado e compra sem cadastro.</span><span class="en">Cart, Pix and cards, shipping rates and guest checkout.</span></p></div>
@@ -289,9 +297,9 @@ footer{padding:36px 0 48px;color:var(--silver-3);font-size:.85rem}
     </ol>
 
     <div class="actions">
-      <a class="btn primary" data-goatcounter-click="lojas-orcamento" href="mailto:am8958867@gmail.com?subject=Or%C3%A7amento%20de%20site%20para%20a%20minha%20loja"><span class="pt">Pedir orçamento</span><span class="en">Get a quote</span></a>
       <!-- O botão do WhatsApp aparece quando o número está em data-whatsapp (só dígitos, com 55 e DDD). -->
-      <a id="zap-lojas" class="btn" data-whatsapp="" data-goatcounter-click="lojas-whatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp</a>
+      <a id="zap-lojas" class="btn primary" data-whatsapp="5511989930562" data-goatcounter-click="lojas-whatsapp" href="#" target="_blank" rel="noopener" hidden><span class="pt">Chamar no WhatsApp</span><span class="en">Message on WhatsApp</span></a>
+      <a class="btn" data-goatcounter-click="lojas-orcamento" href="mailto:am8958867@gmail.com?subject=Or%C3%A7amento%20de%20site%20para%20a%20minha%20loja"><span class="pt">Pedir orçamento</span><span class="en">Get a quote</span></a>
     </div>
     <p class="nota-pequena"><span class="pt">As lojas dos exemplos são fictícias. No site da sua loja entram as suas fotos e as avaliações reais do Google.</span><span class="en">The example shops are fictional. Your site uses your own photos and your real Google reviews.</span></p>
   </section>

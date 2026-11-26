@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa &amp; Pão · Cardápio digital (exemplo)</title>
+<meta name="description" content="Exemplo de cardápio digital feito por Harle: abre no celular pelo QR code da mesa, com busca, categorias e pedido pelo WhatsApp.">
+<meta property="og:title" content="Brasa &amp; Pão · exemplo de cardápio digital">
+<meta property="og:description" content="Cardápio no celular pelo QR code da mesa, com busca, categorias e pedido pelo WhatsApp. Exemplo feito por Harle.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://harlezinhuu.github.io/lojas/cardapio/">
+<meta property="og:image" content="https://harlezinhuu.github.io/assets/og-cardapio.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17120F">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 30q0-18 22-18t22 18Z' fill='%23E9A23B'/%3E%3Crect x='8' y='33' width='48' height='8' rx='4' fill='%237A3B1E'/%3E%3Cpath d='M10 45h44q0 8-22 8t-22-8Z' fill='%23E9A23B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+:root{
+  --fundo:#17120F; --fundo-foto:#2A211B; --cartao:#211A15; --linha:#3A2F27;
+  --texto:#F6EEE6; --suave:#BBA999; --marca:#F2A03D;
+  --acao:#E4572E; --acao-forte:#C9441F; --sobre-acao:#fff;
+  --titulo:"Bricolage Grotesque",system-ui,sans-serif; --corpo:"DM Sans",system-ui,sans-serif;
+}
+.menu{width:min(760px,100% - 32px);margin-inline:auto}
+section{padding:0}
+
+/* topo do cardápio */
+.capa{position:relative;overflow:hidden;padding:clamp(28px,6vw,56px) 0 28px;border-bottom:1px solid var(--linha)}
+.capa::before{content:"";position:absolute;inset:-40% -10% auto;height:120%;background:radial-gradient(closest-side,rgba(242,160,61,.22),transparent);pointer-events:none}
+.capa .menu{position:relative;display:grid;grid-template-columns:auto 1fr;gap:18px 20px;align-items:center}
+.selo{width:clamp(72px,14vw,96px);aspect-ratio:1;border-radius:24px;background:#2A211B;border:1px solid var(--linha);display:grid;place-items:center}
+.selo svg{width:68%}
+.capa h1{font-size:clamp(2.2rem,7vw,3.6rem);line-height:1}
+.capa h1 em{font-style:normal;color:var(--marca)}
+.capa .frase{grid-column:1/-1;color:var(--suave);font-size:1.05rem;max-width:52ch}
+.infos{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
+.infos li{padding:6px 12px;border-radius:999px;background:var(--cartao);border:1px solid var(--linha);font-size:.9rem;color:var(--suave)}
+.infos li b{color:var(--texto);font-weight:600}
+.aberto{background:var(--cartao);font-size:.9rem}
+.capa .chamar{grid-column:1/-1;justify-self:start}
+@media (max-width:520px){.capa .chamar{display:inline-flex}}
+
+/* busca e abas */
+.barra{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--fundo) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha);padding:12px 0 0}
+.busca{display:flex;align-items:center;gap:10px;background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:0 14px;min-height:48px}
+.busca svg{width:20px;height:20px;color:var(--suave);flex:none}
+.busca input{flex:1;min-width:0;background:transparent;border:0;color:var(--texto);font:500 1rem var(--corpo);outline:none;min-height:46px}
+.busca input::placeholder{color:var(--suave)}
+.busca:focus-within{border-color:var(--marca)}
+.abas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 0 12px;margin:0;list-style:none}
+.abas::-webkit-scrollbar{display:none}
+.abas a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--suave);white-space:nowrap;border:1px solid transparent}
+.abas a:hover{color:var(--texto)}
+.abas a.ativa{background:var(--marca);color:#1B130C}
+
+/* categorias e pratos */
+.categoria{padding:30px 0 6px;scroll-margin-top:130px}
+.categoria h2{font-size:clamp(1.6rem,5vw,2.1rem);margin-bottom:4px}
+.categoria > p{color:var(--suave);margin-bottom:14px}
+.pratos{list-style:none;padding:0;display:grid;gap:10px}
+.prato{display:grid;grid-template-columns:1fr 92px;gap:14px;padding:14px;border-radius:18px;background:var(--cartao);border:1px solid var(--linha)}
+.prato h3{font:700 1.12rem/1.2 var(--corpo);letter-spacing:0}
+.prato p{color:var(--suave);font-size:.92rem;margin:4px 0 8px}
+.prato .linha-preco{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.prato .preco{font-weight:700;font-size:1.08rem}
+.prato .de{color:var(--suave);text-decoration:line-through;font-size:.9rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-bottom:6px}
+.tag.top{background:rgba(242,160,61,.16);color:var(--marca)}
+.tag.veg{background:rgba(110,190,110,.15);color:#8FD18F}
+.tag.picante{background:rgba(228,87,46,.16);color:#FF8A66}
+.prato .foto{position:relative;width:92px;height:92px;border-radius:14px;background:var(--fundo-foto);overflow:visible}
+.prato .foto svg{width:100%;height:100%;border-radius:14px}
+.prato .mais{position:absolute;right:-6px;bottom:-6px;width:44px;height:44px;border-radius:50%;border:3px solid var(--cartao);background:var(--acao);color:#fff;font:700 1.5rem/1 var(--corpo);cursor:pointer;display:grid;place-items:center}
+.prato .mais:hover{background:var(--acao-forte)}
+.prato[hidden],.categoria[hidden]{display:none}
+.vazio{display:none;text-align:center;color:var(--suave);padding:40px 0}
+.vazio.ver{display:block}
+
+/* na mesa */
+.mesa{margin:44px 0 8px;display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center;padding:22px;border-radius:24px;border:2px dashed var(--linha)}
+.mesa svg{width:100%}
+.mesa h2{font-size:1.5rem;margin-bottom:6px}
+.mesa p{color:var(--suave);font-size:.95rem}
+@media (max-width:520px){.mesa{grid-template-columns:1fr;text-align:center}.mesa svg{max-width:130px;margin-inline:auto}}
+
+.rodape{margin-top:36px}
+.rodape dl{display:grid;gap:10px;margin-bottom:18px}
+.rodape dt{font-weight:600;color:var(--texto)}
+</style>
+</head>
+<body data-horario="2-6 18:00-23:30; 0 18:00-23:00">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-burger" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2A211B"/><ellipse cx="50" cy="80" rx="34" ry="5" fill="#120D0A"/><path d="M18 46q0-26 32-26t32 26Z" fill="#E9A23B"/><g fill="#FFF3DC" opacity=".85"><ellipse cx="38" cy="30" rx="2.2" ry="1.3"/><ellipse cx="52" cy="26" rx="2.2" ry="1.3"/><ellipse cx="62" cy="33" rx="2.2" ry="1.3"/></g><path d="M16 50q8 6 17 0 9 6 17 0 9 6 17 0 9 6 17 0v4H16Z" fill="#6CC04A"/><path d="M17 55h66v5q-8 5-16 0-9 5-17 0-9 5-17 0-8 5-16 0Z" fill="#F2C230"/><rect x="16" y="60" width="68" height="9" rx="4.5" fill="#6B3219"/><path d="M18 71h64q0 9-32 9t-32-9Z" fill="#E9A23B"/></symbol>
+  <symbol id="i-combo" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2A211B"/><path d="M60 34h22l-3 46H63Z" fill="#E4572E"/><path d="M58 30h26v6H58Z" fill="#F6EEE6"/><path d="M73 30l4-14" stroke="#F6EEE6" stroke-width="3" stroke-linecap="round"/><g transform="translate(-10 14) scale(.75)"><path d="M18 46q0-26 32-26t32 26Z" fill="#E9A23B"/><path d="M16 50q8 6 17 0 9 6 17 0 9 6 17 0 9 6 17 0v4H16Z" fill="#6CC04A"/><rect x="16" y="56" width="68" height="9" rx="4.5" fill="#6B3219"/><path d="M18 67h64q0 9-32 9t-32-9Z" fill="#E9A23B"/></g></symbol>
+  <symbol id="i-batata" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2A211B"/><g fill="#F2C230"><rect x="30" y="18" width="7" height="40" rx="3" transform="rotate(-10 33 38)"/><rect x="42" y="14" width="7" height="44" rx="3"/><rect x="54" y="16" width="7" height="42" rx="3" transform="rotate(8 57 37)"/><rect x="64" y="22" width="7" height="36" rx="3" transform="rotate(14 67 40)"/><rect x="36" y="22" width="7" height="36" rx="3" transform="rotate(4 39 40)"/></g><path d="M26 46h48l-6 38H32Z" fill="#E4572E"/><path d="M38 60q12 8 24 0" stroke="#FFD9CC" stroke-width="3" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-copo" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2A211B"/><path d="M32 30h36l-4 54H36Z" fill="#7A3B1E"/><path d="M33 40h34l-1 10H34Z" fill="#9A5530"/><g fill="#FFF" opacity=".6"><circle cx="44" cy="62" r="2"/><circle cx="54" cy="70" r="1.6"/><circle cx="50" cy="56" r="1.3"/></g><path d="M30 26h40v6H30Z" fill="#F6EEE6"/><path d="M54 26l6-14" stroke="#E4572E" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-doce" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2A211B"/><ellipse cx="50" cy="80" rx="32" ry="5" fill="#120D0A"/><path d="M22 52h56v22q-28 8-56 0Z" fill="#5A3020"/><path d="M22 52q28-10 56 0v6q-6 6-12 0-7 7-14 0-7 7-14 0-7 7-16 0Z" fill="#F6EEE6"/><circle cx="50" cy="38" r="7" fill="#E4572E"/><path d="M50 31q3-8 8-8" stroke="#6CC04A" stroke-width="2.5" fill="none" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="demo">Restaurante fictício · exemplo de cardápio digital feito por Harle. <a href="../../#lojas">Quero um assim →</a></div>
+
+<header class="capa">
+  <div class="menu">
+    <div class="selo" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-burger"/></svg></div>
+    <div>
+      <h1>Brasa <em>&amp;</em> Pão</h1>
+      <p class="aberto" data-aberto style="margin-top:10px"><i></i><span>Horário</span></p>
+    </div>
+    <p class="frase">Hambúrguer artesanal na brasa, com pão de fermentação natural. Escolha aqui e mande o pedido pelo WhatsApp, ou chame o garçom.</p>
+    <ul class="infos">
+      <li>Entrega <b>30 a 45 min</b></li>
+      <li>Retirada no balcão</li>
+      <li>Pix, cartão e dinheiro</li>
+    </ul>
+    <a class="btn zap pequeno chamar" href="#" data-zap="">Chamar no WhatsApp</a>
+  </div>
+</header>
+
+<div class="barra">
+  <div class="menu">
+    <label class="busca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="busca" type="search" placeholder="Buscar no cardápio" aria-label="Buscar no cardápio" autocomplete="off"></label>
+    <ul class="abas" id="abas">
+      <li><a href="#burgers" class="ativa">Burgers</a></li>
+      <li><a href="#combos">Combos</a></li>
+      <li><a href="#porcoes">Porções</a></li>
+      <li><a href="#bebidas">Bebidas</a></li>
+      <li><a href="#sobremesas">Sobremesas</a></li>
+    </ul>
+  </div>
+</div>
+
+<main class="menu">
+  <section class="categoria" id="burgers">
+    <h2>Burgers</h2>
+    <p>Blend de 160 g na brasa, pão de fermentação natural feito aqui.</p>
+    <ul class="pratos">
+      <li class="prato"><div><span class="tag top">Mais pedido</span><h3>Brasa Clássico</h3><p>Blend 160 g, queijo prato, alface, tomate e maionese da casa.</p><div class="linha-preco"><span class="preco">R$ 32,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-burger"/></svg><button class="mais" data-zap="um Brasa Clássico" aria-label="Pedir Brasa Clássico">+</button></div></li>
+      <li class="prato"><div><h3>Bacon Duplo</h3><p>Dois blends de 160 g, cheddar, bacon crocante e cebola caramelizada.</p><div class="linha-preco"><span class="preco">R$ 42,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-burger"/></svg><button class="mais" data-zap="um Bacon Duplo" aria-label="Pedir Bacon Duplo">+</button></div></li>
+      <li class="prato"><div><span class="tag picante">Picante</span><h3>Fogo na Brasa</h3><p>Blend 160 g, pepper jack, jalapeño e molho de pimenta defumada.</p><div class="linha-preco"><span class="preco">R$ 36,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-burger"/></svg><button class="mais" data-zap="um Fogo na Brasa" aria-label="Pedir Fogo na Brasa">+</button></div></li>
+      <li class="prato"><div><span class="tag veg">Vegetariano</span><h3>Horta</h3><p>Hambúrguer de grão-de-bico, queijo coalho, rúcula e tomate seco.</p><div class="linha-preco"><span class="preco">R$ 31,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-burger"/></svg><button class="mais" data-zap="um Horta" aria-label="Pedir Horta">+</button></div></li>
+      <li class="prato"><div><h3>Smash Kids</h3><p>Smash de 90 g, queijo e ketchup. Acompanha batata pequena.</p><div class="linha-preco"><span class="preco">R$ 24,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-burger"/></svg><button class="mais" data-zap="um Smash Kids" aria-label="Pedir Smash Kids">+</button></div></li>
+    </ul>
+  </section>
+
+  <section class="categoria" id="combos">
+    <h2>Combos</h2>
+    <p>Burger, batata média e refrigerante lata.</p>
+    <ul class="pratos">
+      <li class="prato"><div><span class="tag top">Promoção</span><h3>Combo Clássico</h3><p>Brasa Clássico, batata média e refrigerante lata.</p><div class="linha-preco"><span class="preco">R$ 44,90</span><span class="de">R$ 51,70</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-combo"/></svg><button class="mais" data-zap="um Combo Clássico" aria-label="Pedir Combo Clássico">+</button></div></li>
+      <li class="prato"><div><h3>Combo Duplo</h3><p>Bacon Duplo, batata média com cheddar e bacon, e refrigerante lata.</p><div class="linha-preco"><span class="preco">R$ 59,90</span><span class="de">R$ 67,60</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-combo"/></svg><button class="mais" data-zap="um Combo Duplo" aria-label="Pedir Combo Duplo">+</button></div></li>
+    </ul>
+  </section>
+
+  <section class="categoria" id="porcoes">
+    <h2>Porções</h2>
+    <p>Para dividir. Ou não.</p>
+    <ul class="pratos">
+      <li class="prato"><div><h3>Batata rústica</h3><p>Com casca, alecrim e maionese de alho. Serve 2 pessoas.</p><div class="linha-preco"><span class="preco">R$ 22,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-batata"/></svg><button class="mais" data-zap="uma batata rústica" aria-label="Pedir Batata rústica">+</button></div></li>
+      <li class="prato"><div><span class="tag top">Mais pedido</span><h3>Batata cheddar e bacon</h3><p>Batata frita coberta com cheddar cremoso e bacon. Serve 2 pessoas.</p><div class="linha-preco"><span class="preco">R$ 29,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-batata"/></svg><button class="mais" data-zap="uma batata cheddar e bacon" aria-label="Pedir Batata cheddar e bacon">+</button></div></li>
+      <li class="prato"><div><span class="tag veg">Vegetariano</span><h3>Anéis de cebola</h3><p>Empanados na hora, com molho barbecue.</p><div class="linha-preco"><span class="preco">R$ 24,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-batata"/></svg><button class="mais" data-zap="anéis de cebola" aria-label="Pedir Anéis de cebola">+</button></div></li>
+    </ul>
+  </section>
+
+  <section class="categoria" id="bebidas">
+    <h2>Bebidas</h2>
+    <p>Geladas de verdade.</p>
+    <ul class="pratos">
+      <li class="prato"><div><h3>Refrigerante lata</h3><p>Coca-Cola, Guaraná ou Sprite. 350 ml.</p><div class="linha-preco"><span class="preco">R$ 7,00</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-copo"/></svg><button class="mais" data-zap="um refrigerante lata" aria-label="Pedir Refrigerante lata">+</button></div></li>
+      <li class="prato"><div><h3>Suco natural</h3><p>Laranja, limão ou maracujá. 400 ml.</p><div class="linha-preco"><span class="preco">R$ 11,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-copo"/></svg><button class="mais" data-zap="um suco natural" aria-label="Pedir Suco natural">+</button></div></li>
+      <li class="prato"><div><h3>Milkshake</h3><p>Chocolate, morango ou ovomaltine. 400 ml.</p><div class="linha-preco"><span class="preco">R$ 19,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-copo"/></svg><button class="mais" data-zap="um milkshake" aria-label="Pedir Milkshake">+</button></div></li>
+      <li class="prato"><div><h3>Água</h3><p>Com ou sem gás. 500 ml.</p><div class="linha-preco"><span class="preco">R$ 4,50</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-copo"/></svg><button class="mais" data-zap="uma água" aria-label="Pedir Água">+</button></div></li>
+    </ul>
+  </section>
+
+  <section class="categoria" id="sobremesas">
+    <h2>Sobremesas</h2>
+    <p>Para fechar bem.</p>
+    <ul class="pratos">
+      <li class="prato"><div><h3>Brownie com sorvete</h3><p>Brownie quente, sorvete de creme e calda de chocolate.</p><div class="linha-preco"><span class="preco">R$ 18,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-doce"/></svg><button class="mais" data-zap="um brownie com sorvete" aria-label="Pedir Brownie com sorvete">+</button></div></li>
+      <li class="prato"><div><h3>Cheesecake de frutas vermelhas</h3><p>Fatia generosa, base crocante.</p><div class="linha-preco"><span class="preco">R$ 16,90</span></div></div><div class="foto"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-doce"/></svg><button class="mais" data-zap="um cheesecake" aria-label="Pedir Cheesecake">+</button></div></li>
+    </ul>
+  </section>
+
+  <p class="vazio" id="vazio" role="status">Nada com esse nome no cardápio. Tente outra palavra.</p>
+
+  <div class="mesa">
+    <svg viewBox="0 0 120 150" aria-hidden="true">
+      <path d="M20 140 40 20h40l20 120Z" fill="#2A211B" stroke="#3A2F27" stroke-width="2"/>
+      <rect x="38" y="44" width="44" height="44" rx="4" fill="#F6EEE6"/>
+      <g fill="#17120F" id="qr"></g>
+      <text x="60" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#F2A03D">APONTE A CÂMERA</text>
+      <text x="60" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#BBA999">e veja o cardápio</text>
+    </svg>
+    <div>
+      <h2>Assim fica na mesa</h2>
+      <p>O cliente aponta a câmera para o QR code e o cardápio abre no celular, sem baixar nada. Mudou um preço? Atualizo no mesmo dia e o QR code continua o mesmo. No cardápio de verdade entram as fotos reais dos seus pratos.</p>
+    </div>
+  </div>
+
+  <footer class="rodape">
+    <dl>
+      <div><dt>Horário</dt><dd>Terça a sábado, 18h às 23h30 · Domingo, 18h às 23h · Segunda, fechado</dd></div>
+      <div><dt>Endereço</dt><dd>Rua do Carvão, 41 · Vila Aurora (endereço de exemplo)</dd></div>
+    </dl>
+    <div class="wrap" style="width:100%;padding:0"><span>Brasa &amp; Pão · restaurante fictício, criado para mostrar o trabalho</span><span>Cardápio por <a href="../../#lojas">Harle</a></span></div>
+  </footer>
+</main>
+
+
+<script src="../base.js" defer></script>
+<script>
+(function () {
+  // QR code decorativo da plaquinha (desenho, não é um QR de verdade)
+  var g = document.getElementById('qr'), s = 7, n = '', seed = 41
+  function r() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 }
+  function canto(x, y) { n += '<rect x="' + x + '" y="' + y + '" width="12" height="12"/><rect x="' + (x + 2) + '" y="' + (y + 2) + '" width="8" height="8" fill="#F6EEE6"/><rect x="' + (x + 4) + '" y="' + (y + 4) + '" width="4" height="4"/>' }
+  for (var i = 0; i < 10; i++) for (var j = 0; j < 10; j++) {
+    var na = (i < 3 && j < 3) || (i > 6 && j < 3) || (i < 3 && j > 6)
+    if (!na && r() > .5) n += '<rect x="' + (42 + i * 3.6) + '" y="' + (48 + j * 3.6) + '" width="3.6" height="3.6"/>'
+  }
+  canto(42, 48); canto(66, 48); canto(42, 72)
+  g.innerHTML = n
+
+  // Busca no cardápio
+  var campo = document.getElementById('busca'), pratos = document.querySelectorAll('.prato'), cats = document.querySelectorAll('.categoria'), vazio = document.getElementById('vazio')
+  function semAcento(t) { return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() }
+  campo.addEventListener('input', function () {
+    var q = semAcento(campo.value.trim()), achou = 0
+    pratos.forEach(function (p) { var ok = !q || semAcento(p.textContent).indexOf(q) >= 0; p.hidden = !ok; if (ok) achou++ })
+    cats.forEach(function (c) { c.hidden = !!q && !c.querySelector('.prato:not([hidden])') })
+    vazio.classList.toggle('ver', achou === 0)
+  })
+
+  // Aba da categoria que está na tela
+  var abas = document.querySelectorAll('#abas a')
+  function marcar(id) {
+    abas.forEach(function (a) {
+      var sim = a.getAttribute('href') === '#' + id
+      a.classList.toggle('ativa', sim)
+      if (sim && a.scrollIntoView) a.parentNode.parentNode.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' })
+    })
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) marcar(e.target.id) }) }, { rootMargin: '-140px 0px -60% 0px' })
+    cats.forEach(function (c) { io.observe(c) })
+  }
+})()
+</script>
+</body>
+</html>
